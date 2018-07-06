@@ -17,7 +17,7 @@ public class Main
         cmd.cmdParse(args);
         if(cmd.className!=null){
            startJVM(cmd);
-           cxzc
+           
         }
     }
 }
