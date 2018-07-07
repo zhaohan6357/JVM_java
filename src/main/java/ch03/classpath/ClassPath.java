@@ -1,4 +1,4 @@
-package ch02.classpath;
+package ch03.classpath;
 
 import java.io.File;
 
