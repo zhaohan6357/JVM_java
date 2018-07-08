@@ -1,8 +1,11 @@
 package ch03.classfile;
 
-public class ConstantFieldrefInfo extends ConstantInfo {
-    ConstantMemberrefInfo constantMemberrefInfo;
-    public ConstantFieldrefInfo(ConstantMemberrefInfo constantMemberrefInfo) {
-        this.constantMemberrefInfo=constantMemberrefInfo;
+public class ConstantFieldrefInfo extends ConstantMemberrefInfo {
+    public ConstantFieldrefInfo(ConstantPool cp) {
+        super.cp=cp;
+    }
+    @Override
+    public int getType() {
+        return ConstantInfo.CONSTANT_Fieldref;
     }
 }

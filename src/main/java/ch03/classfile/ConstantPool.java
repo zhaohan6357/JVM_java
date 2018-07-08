@@ -3,7 +3,7 @@ package ch03.classfile;
 import org.joou.UShort;
 
 public class ConstantPool {
-    ConstantInfo[] constantPool;
+    public ConstantInfo[] constantPool;
 
 
 //    func readConstantPool(reader *ClassReader) ConstantPool {...}

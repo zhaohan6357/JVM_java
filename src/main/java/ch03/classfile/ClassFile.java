@@ -57,11 +57,42 @@ public class ClassFile {
          attributes=readAttributes(reader,constantPool);//  self.attributes = readAttributes(reader, self.constantPool)
     }
     //TODO
-    private AttributeInfo[] readAttributes(ClassReader reader, ConstantPool constantPool) {
-        return null;
+    public static AttributeInfo[] readAttributes(ClassReader reader, ConstantPool constantPool) {
+   /*     func readAttributes(reader *ClassReader, cp ConstantPool) []AttributeInfo {
+            attributesCount := reader.readUint16()
+            attributes := make([]AttributeInfo, attributesCount)
+            for i := range attributes {
+                attributes[i] = readAttribute(reader, cp)
+            }
+            return attributes
+        }*/
+        int attributesCount=reader.readUInt16().intValue();
+        AttributeInfo[] attributes=new AttributeInfo[attributesCount];
+        for(int i=0;i<attributesCount;i++){
+            attributes[i]=readAttribute(reader,constantPool);
+        }
+
+        return attributes;
     }
 
-    private MemberInfo[] readMembers(ClassReader reader, ConstantPool constantPool) {
+    public static AttributeInfo readAttribute(ClassReader reader, ConstantPool constantPool) {
+   /*     func readAttribute(reader *ClassReader, cp ConstantPool) AttributeInfo {
+            attrNameIndex := reader.readUint16()
+            attrName := cp.getUtf8(attrNameIndex)
+            attrLen := reader.readUint32()
+            attrInfo := newAttributeInfo(attrName, attrLen, cp)
+            attrInfo.readInfo(reader)
+            return attrInfo
+        }*/
+        UShort attrNameIndex=reader.readUInt16();
+        String attrName=constantPool.getUtf8(attrNameIndex);
+        UInteger attrLen=reader.readUInt32();  //each attribute all has nameIndex and len , 16 an 32 bits respectively
+        AttributeInfo attrInfo=AttributeInfo.newAttributeInfo(attrName,attrLen,constantPool);
+        attrInfo.readInfo(reader);
+        return attrInfo;
+    }
+
+    public  static MemberInfo[] readMembers(ClassReader reader, ConstantPool constantPool) {
         int memberCount=reader.readUInt16().intValue();
         MemberInfo[] members=new MemberInfo[memberCount];
         for(int i=0;i<memberCount;i++){
@@ -70,7 +101,7 @@ public class ClassFile {
         return members;
     }
 
-    private MemberInfo readMember(ClassReader reader, ConstantPool constantPool) {
+    public static MemberInfo readMember(ClassReader reader, ConstantPool constantPool) {
         MemberInfo member=new MemberInfo();
         member.setCp(constantPool);
         member.setAccessFlag(reader.readUInt16());
@@ -80,13 +111,13 @@ public class ClassFile {
         return member;
     }
 
-    private ConstantPool readConstantPool(ClassReader reader) {
+    public static ConstantPool readConstantPool(ClassReader reader) {
         ConstantPool pool=new ConstantPool();
         int cpCount=reader.readUInt16().intValue();
         pool.constantPool=new ConstantInfo[cpCount];
         for(int i=1;i<cpCount;i++){
             pool.constantPool[i]= readConstantInfo(reader, pool);
-            if(pool.constantPool[i].getType()==ConstantInfo.CONSTANT_Float||
+            if(pool.constantPool[i].getType()==ConstantInfo.CONSTANT_Long||
                     pool.constantPool[i].getType()==ConstantInfo.CONSTANT_Double){
                 i++;
             }
@@ -94,13 +125,14 @@ public class ClassFile {
         return pool;
     }
 
-    private ConstantInfo readConstantInfo(ClassReader reader, ConstantPool pool) {
+    public static ConstantInfo readConstantInfo(ClassReader reader, ConstantPool pool) {
        /* tag := reader.readUint8()
         c := newConstantInfo(tag, cp)
         c.readInfo(reader)
         return c*/
        int tag=reader.readUInt8().intValue();
-       ConstantInfo c=ConstantInfo.returnConstantInfo(tag,pool);
+       ConstantInfo c=ConstantInfo.newConstantInfo(tag,pool);
+       c.readInfo(reader);
        return c;
     }
 

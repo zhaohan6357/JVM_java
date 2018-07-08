@@ -2,38 +2,44 @@ package ziptest;
 
 import org.junit.jupiter.api.Test;
 import org.omg.CORBA.PUBLIC_MEMBER;
+import sun.java2d.SurfaceDataProxy;
 
 import javax.sound.midi.Soundbank;
 import java.lang.annotation.AnnotationFormatError;
+import java.util.Stack;
 
 class Animal{
+    int a,b,c,d;
 
-    void printName(){
-
+    public Animal(int a, int b, int c, int d) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
     }
-    void getName(){
-        printName();
-    }
 
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "a=" + a +
+                ", b=" + b +
+                ", c=" + c +
+                ", d=" + d +
+                '}';
+    }
 }
-class Cat extends Animal{
-    void printName(){
-        System.out.println("I am cat");
-    }
 
-
-}
-
-class Dog extends Animal{
-    void printName(){
-        System.out.println("I am dog");
-    }
-
-
-}
 public class HelloTest {
     public static void main(String[] args) {
-        System.out.println(Float.intBitsToFloat(0x4048F5C3));
+        int i=0;
+        Stack<Integer> stack=new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        Animal animal=new Animal(stack.pop(),stack.pop(),stack.pop(),stack.pop());
+        System.out.println(animal);
+
     }
 
 

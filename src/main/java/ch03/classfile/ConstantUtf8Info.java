@@ -1,5 +1,7 @@
 package ch03.classfile;
 
+import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
+
 import java.io.*;
 
 public class ConstantUtf8Info  extends  ConstantInfo{
@@ -14,10 +16,15 @@ public class ConstantUtf8Info  extends  ConstantInfo{
     public void readInfo(ClassReader reader) {
         int length=reader.readUInt16().intValue();
         byte[] bytes=reader.readBytes(length);
-        DataInputStream dataInputStream=new DataInputStream(new ByteArrayInputStream(bytes));
+       /* ByteArrayInputStream bin=new ByteArrayInputStream(bytes);
+        DataInputStream dataInputStream=new DataInputStream(bin);*/
         try {
-            this.str = dataInputStream.readUTF();
+            this.str=new String(bytes,"utf-8");
+        /*    this.str = dataInputStream.readUTF();
+            dataInputStream.close();
+            bin.close();*/
         }catch (Exception e){
+
             System.out.println("read utf8 info failed");
         }
     }

@@ -23,8 +23,13 @@ public class ConstantInfo {
     }
     public void readInfo(ClassReader reader){
     }
-
-    public static ConstantInfo returnConstantInfo(int tag,ConstantPool cp){
+    public String className(){
+        return null;
+    }
+    public String[] nameAndDescriptor(){
+        return null;
+    }
+    public static ConstantInfo newConstantInfo(int tag, ConstantPool cp){
             switch (tag){
                 case CONSTANT_Integer:
                     return new ConstantIntegerInfo();
@@ -41,11 +46,11 @@ public class ConstantInfo {
                 case CONSTANT_Class:
                     return new ConstantClassInfo(cp);
                 case CONSTANT_Fieldref:
-                    return new ConstantFieldrefInfo(new ConstantMemberrefInfo(cp));
+                    return new ConstantFieldrefInfo(cp);
                 case CONSTANT_Methodref:
-                    return new ConstantMethodrefInfo(new ConstantMemberrefInfo(cp));
+                    return new ConstantMethodrefInfo(cp);
                 case CONSTANT_InterfaceMethodref:
-                    return new ConstantInterfaceMethodrefInfo(new ConstantMemberrefInfo(cp));
+                    return new ConstantInterfaceMethodrefInfo(cp);
                 case CONSTANT_NameAndType:
                     return new ConstantNameAndTypeInfo();
                 case CONSTANT_MethodType:

@@ -1,8 +1,11 @@
 package ch03.classfile;
 
-public class ConstantInterfaceMethodrefInfo extends ConstantInfo {
-    ConstantMemberrefInfo constantMemberrefInfo;
-    public ConstantInterfaceMethodrefInfo(ConstantMemberrefInfo constantMemberrefInfo) {
-        this.constantMemberrefInfo=constantMemberrefInfo;
+public class ConstantInterfaceMethodrefInfo extends ConstantMemberrefInfo {
+    public ConstantInterfaceMethodrefInfo(ConstantPool cp) {
+        super.cp=cp;
+    }
+    @Override
+    public int getType() {
+        return ConstantInfo.CONSTANT_InterfaceMethodref;
     }
 }
