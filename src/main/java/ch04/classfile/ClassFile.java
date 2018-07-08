@@ -1,4 +1,4 @@
-package ch03.classfile;
+package ch04.classfile;
 
 import org.joou.UInteger;
 import org.joou.UShort;

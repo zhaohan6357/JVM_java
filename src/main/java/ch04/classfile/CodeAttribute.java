@@ -1,7 +1,6 @@
-package ch03.classfile;
+package ch04.classfile;
 
 import org.joou.UShort;
-
 
 
 
@@ -45,8 +44,8 @@ public class CodeAttribute extends AttributeInfo {
         maxLocals=reader.readUInt16();
         int codeLength=reader.readUInt32().intValue();
         code=reader.readBytes(codeLength);
-        exceptionTable=ExceptionTableEntry.readExceptionTable(reader);
-        attributes=ClassFile.readAttributes(reader,cp);
+        exceptionTable= ExceptionTableEntry.readExceptionTable(reader);
+        attributes= ClassFile.readAttributes(reader,cp);
     }
 
     public CodeAttribute(ConstantPool cp) {
