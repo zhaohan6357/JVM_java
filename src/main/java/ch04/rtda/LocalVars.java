@@ -2,7 +2,7 @@ package ch04.rtda;
 
 import org.joou.UInteger;
 
-//todo
+
 public class LocalVars {
     Slot[] localVars;
 
@@ -16,6 +16,10 @@ public class LocalVars {
         if (maxLocals.intValue() > 0) {
             LocalVars local = new LocalVars();
             local.localVars = new Slot[maxLocals.intValue()];
+            for(int i=0;i<maxLocals.intValue();i++){
+                local.localVars[i]=new Slot(); //对象数组的每个对象都需要初始化
+            }
+
             return local;
         }
         return null;
@@ -108,8 +112,8 @@ public class LocalVars {
         return localVars[index.intValue()].ref;
     }
 
-
-    public static void main(String[] args) {
+//test for "long value decode "
+/*    public static void main(String[] args) {
         long l = -1231123321123123l;
         int low = (int) l;
         int high = (int) (l >> 32);
@@ -131,5 +135,5 @@ public class LocalVars {
         long high2 = (long) (l >> 32);
         System.out.println(high2 << 32 | low2);
 
-    }
+    }*/
 }
