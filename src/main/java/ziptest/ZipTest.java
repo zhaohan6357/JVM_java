@@ -7,6 +7,7 @@ import java.util.zip.ZipInputStream;
 
 public class ZipTest{
     public static void main(String[] args) throws IOException {
+
         File file=new File("F:\\zipTest\\hello");
         ZipFile zf=new ZipFile(file);
         InputStream in=new BufferedInputStream(new FileInputStream(file));

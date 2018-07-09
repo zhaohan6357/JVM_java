@@ -1,0 +1,33 @@
+1.long类型的高32位和低32位截取 不能用有符号类型移位运算,移位运算时应保证无符号
+        long l = -1231123321123123l;
+        int low = (int) l;
+        int high = (int) (l >> 32);
+        System.out.println(Long.toBinaryString(l));//       1001010 11001010 11011101 11110010 10110011
+        System.out.println(Integer.toBinaryString(low));//          11001010 11011101 11110010 10110011
+        System.out.println(Integer.toBinaryString(high));// 1001010
+        System.out.println((((long) high) << 32) | (((long) low) & 0xffffffffl));
+        ;
+
+        System.out.println("------------------------");
+        long H = UInteger.valueOf(high).longValue();
+        long L = UInteger.valueOf(low).longValue();
+        System.out.println(H << 32 | L);
+
+        System.out.println("---------------------");
+        long low2 = (long) (l & 0xffffffffl);
+        ;
+        System.out.println(low2);
+        long high2 = (long) (l >> 32);
+        System.out.println(high2 << 32 | low2);
+
+2.对象数组的初始化时除了使用new分配引用空间,对于每个对象元素也要new一下分配空间
+        Object[] objs = new Object[N]
+        for(i = 1...N){
+            objs = new Object();
+        }
+
+
+3.合理利用IDEA的bookmark功能   F11  Ctrl+F11
+
+
+
