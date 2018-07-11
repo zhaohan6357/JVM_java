@@ -78,6 +78,31 @@ public class ByteCodeReader {
     }
 
 
-    //todo ReadInt32s（）和SkipPadding（）
+
+ /*   func (self *BytecodeReader) SkipPadding() {
+        for self.pc%4 != 0 {
+            self.ReadUint8()
+        }
+    }*/
+    public void skipPadding(){
+        while(pc%4 != 0){
+            readUint8();
+        }
+    }
+
+    public int[] readInt32s(int n){
+        int[] ints=new int[n];
+        for(int i=0;i<n;i++){
+            ints[i]=readInt32();
+        }
+        return ints;
+    }
+    /*func (self *BytecodeReader) ReadInt32s(n int32) []int32 {
+        ints := make([]int32, n)
+        for i := range ints {
+            ints[i] = self.ReadInt32()
+        }
+        return ints
+    }*/
 
 }

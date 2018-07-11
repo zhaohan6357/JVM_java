@@ -17,8 +17,8 @@ public class Thread {
         func (self *Thread) PushFrame(frame *Frame) {...}
         func (self *Thread) PopFrame() *Frame {...}
         func (self *Thread) CurrentFrame() *Frame {...}*/
-    int pc;
-    Stack stack;
+    public int pc;
+    public Stack stack;
 
 
     public int getPc(){
