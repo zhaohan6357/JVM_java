@@ -9,12 +9,12 @@ public class OperandStack {
         size uint
         slots []Slot
     }*/
-    UInteger size;
-    Slot[] slots;
+    public UInteger size;
+    public Slot[] slots;
 /*
     func newOperandStack(maxStack uint) *OperandStack {
         if maxStack > 0 {
-            return &OperandStack{
+            return new OperandStack{
                 slots: make([]Slot, maxStack),
             }
         }

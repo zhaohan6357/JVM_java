@@ -9,7 +9,7 @@ public class IAND extends NoOperandsInstruction{
         stack := frame.OperandStack()
         v2 := stack.PopInt()
         v1 := stack.PopInt()
-        result := v1 & v2
+        result := v1 new  v2
         stack.PushInt(result)
     }*/
 
@@ -17,7 +17,7 @@ public class IAND extends NoOperandsInstruction{
     public void Execute(Frame frame) {
         int v2=frame.operandStack.popInt();
         int v1=frame.operandStack.popInt();
-        int result=v1&v2;
+        int result=v1& v2;
         frame.operandStack.pushInt(result);
 
     }

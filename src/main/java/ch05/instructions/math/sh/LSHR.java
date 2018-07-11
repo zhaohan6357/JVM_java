@@ -8,7 +8,7 @@ public class LSHR extends NoOperandsInstruction{
         stack := frame.OperandStack()
         v2 := stack.PopInt()
         v1 := stack.PopLong()
-        s := uint32(v2) & 0x3f
+        s := uint32(v2) new  0x3f
         result := v1 >> s
         stack.PushLong(result)
     }*/

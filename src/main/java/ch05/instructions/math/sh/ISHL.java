@@ -10,7 +10,7 @@ public class ISHL extends NoOperandsInstruction {
         stack := frame.OperandStack()
         v2 := stack.PopInt()
         v1 := stack.PopInt()
-        s := uint32(v2) & 0x1f
+        s := uint32(v2) new  0x1f
         result := v1 << s
         stack.PushInt(result)
     }*/
@@ -19,7 +19,7 @@ public class ISHL extends NoOperandsInstruction {
     public void Execute(Frame frame) {
         int v2=frame.operandStack.popInt();
         int v1=frame.operandStack.popInt();
-        int s= v2 &(0x1f);
+        int s= v2 & (0x1f);
         int result=v1<<s;
         frame.operandStack.pushInt(result);
     }

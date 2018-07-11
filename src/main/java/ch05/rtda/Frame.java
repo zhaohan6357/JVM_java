@@ -20,13 +20,14 @@ public class Frame {
     public int nextPC;
 
 /*    func NewFrame(maxLocals, maxStack uint) *Frame {
-        return &Frame{
+        return new Frame{
             localVars: newLocalVars(maxLocals),
                     operandStack: newOperandStack(maxStack),
         }
     }*/
-    public static Frame newFrame(UInteger maxLocals, UInteger maxStack){
+    public static Frame newFrame(Thread thread,UInteger maxLocals, UInteger maxStack){
         Frame frame=new Frame();
+        frame.thread=thread;
         frame.localVars= LocalVars.newLocalVars(maxLocals);
         frame.operandStack= OperandStack.newOperandStack(maxStack);
         return frame;

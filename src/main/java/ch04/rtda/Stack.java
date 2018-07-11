@@ -19,7 +19,7 @@ public class Stack {
     Frame _top;
 
     /*    func newStack(maxSize uint) *Stack {
-            return &Stack{
+            return new Stack{
                 maxSize: maxSize,
             }
         }*/

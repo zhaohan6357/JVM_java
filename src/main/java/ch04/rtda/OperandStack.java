@@ -16,7 +16,7 @@ public class OperandStack {
 /*
     func newOperandStack(maxStack uint) *OperandStack {
         if maxStack > 0 {
-            return &OperandStack{
+            return new OperandStack{
                 slots: make([]Slot, maxStack),
             }
         }

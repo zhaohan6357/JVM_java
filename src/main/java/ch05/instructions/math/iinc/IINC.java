@@ -23,8 +23,8 @@ public class IINC extends Instruction{
         val += self.Const
         localVars.SetInt(self.Index, val)
     }*/
-    UInteger index;
-    int Const;
+
+
 
     @Override
     public void FetchOperands(ByteCodeReader reader) {

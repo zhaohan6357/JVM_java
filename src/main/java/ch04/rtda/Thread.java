@@ -34,7 +34,7 @@ public class Thread {
 
     public static Thread newThread(){
    /*     func NewThread() *Thread {
-            return &Thread{
+            return new Thread{
                 stack: newStack(1024),
             }
         }*/

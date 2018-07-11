@@ -8,7 +8,7 @@ public class ISHR extends NoOperandsInstruction {
     public void Execute(Frame frame) {
         int v2=frame.operandStack.popInt();
         int v1=frame.operandStack.popInt();
-        int s= v2 &(0x1f);
+        int s= v2&(0x1f);
         int result=v1>>s;
         frame.operandStack.pushInt(result);
     }

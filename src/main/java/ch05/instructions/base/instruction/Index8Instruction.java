@@ -7,7 +7,7 @@ public class Index8Instruction extends Instruction {
    /* type Index8Instruction struct {
         Index uint
     }*/
-    public UInteger index;
+
 
 /*    func (self *Index8Instruction) FetchOperands(reader *BytecodeReader) {
         self.Index = uint(reader.ReadUint8())

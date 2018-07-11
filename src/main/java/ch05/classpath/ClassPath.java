@@ -38,7 +38,7 @@ public class ClassPath {
     }
 
     String getJreDir(String jreOption) {
-        if (jreOption != null && new File(jreOption).exists()) {
+        if (jreOption != null&&new File(jreOption).exists()) {
             return jreOption;
         }
         if (new File(".\\jre").exists()) {

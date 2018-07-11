@@ -80,7 +80,7 @@ public class Main
         String name=cmd.className.replace('.','/');
        /* byte[] data=cp.ReadClass(name);
         for(byte b:data)
-       System.out.print((0xFF & b)+" ");*/
+       System.out.print((0xFF new  b)+" ");*/
         ClassFile cf=loadClass(name,cp);
         printClassInfo(cf);
 

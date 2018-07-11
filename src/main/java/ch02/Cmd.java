@@ -45,7 +45,7 @@ public class Cmd {
         List<String> ars= commandLine.getArgList();
         if(ars.size()>0){
             className=ars.get(0);
+            arg=ars.subList(1,ars.size());
         }
-        arg=ars.subList(1,ars.size());
     }
 }

@@ -7,7 +7,7 @@ public class BranchInstruction extends Instruction{
 /*    type BranchInstruction struct {
         Offset int
     }*/
-    public int offset;
+
 
 /*    func (self *BranchInstruction) FetchOperands(reader *BytecodeReader) {
         self.Offset = int(reader.ReadInt16())

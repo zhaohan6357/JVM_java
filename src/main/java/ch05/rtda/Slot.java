@@ -5,7 +5,14 @@ public class Slot {
         num int32
         ref *Object
     }*/
-    int num;
-    Object ref;
+    public int num;
+    public Object ref;
 
+    @Override
+    public String toString() {
+        return "Slot{" +
+                "num=" + num +
+                ", ref=" + ref +
+                '}';
+    }
 }

@@ -4,20 +4,21 @@ import org.joou.UShort;
 
 public class MemberInfo {
 
-     private ConstantPool cp;// ConstantPool
-     private UShort accessFlag;  //    accessFlags uint16
-     private UShort nameIndex;  //    nameIndex uint16
-     private UShort descriptionIndex;  //    descriptorIndex uint16
-     private AttributeInfo[] attributes;  //    attributes []AttributeInfo
+    private ConstantPool cp;// ConstantPool
+    private UShort accessFlag;  //    accessFlags uint16
+    private UShort nameIndex;  //    nameIndex uint16
+    private UShort descriptionIndex;  //    descriptorIndex uint16
+    private AttributeInfo[] attributes;  //    attributes []AttributeInfo
 
     public UShort getAccessFlag() {
         return accessFlag;
     }
 
-    public String name(){
+    public String name() {
         return cp.getUtf8(nameIndex);
     }
-    public String descripter(){
+
+    public String descripter() {
         return cp.getUtf8(descriptionIndex);
     }
 
@@ -29,6 +30,7 @@ public class MemberInfo {
         this.nameIndex = nameIndex;
 
     }
+
     public void setDescriptionIndex(UShort descriptionIndex) {
         this.descriptionIndex = descriptionIndex;
     }
@@ -40,4 +42,23 @@ public class MemberInfo {
     public void setCp(ConstantPool cp) {
         this.cp = cp;
     }
+
+    /*  func (self *MemberInfo) CodeAttribute() *CodeAttribute {
+          for _, attrInfo := range self.attributes {
+              switch attrInfo.(type) {
+  case *CodeAttribute:
+              return attrInfo.(*CodeAttribute)
+  }
+          }r
+          eturn nil
+      }*/
+    public CodeAttribute CodeAttribute() {
+        for (AttributeInfo attributeInfo : attributes) {
+            if (attributeInfo.getClass() == CodeAttribute.class) {
+                return (CodeAttribute) attributeInfo;
+            }
+        }
+        return null;
+    }
+
 }

@@ -16,7 +16,7 @@ public class LineNumberTableAttribute extends AttributeInfo {
         lineNumberTableLength := reader.readUint16()
         self.lineNumberTable = make([]*LineNumberTableEntry, lineNumberTableLength)
         for i := range self.lineNumberTable {
-            self.lineNumberTable[i] = &LineNumberTableEntry{
+            self.lineNumberTable[i] = new LineNumberTableEntry{
                 startPc: reader.readUint16(),
                         lineNumber: reader.readUint16(),
             }

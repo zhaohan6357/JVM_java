@@ -9,7 +9,7 @@ public class IOR extends NoOperandsInstruction{
         stack := frame.OperandStack()
         v2 := stack.PopInt()
         v1 := stack.PopInt()
-        result := v1 & v2
+        result := v1 new  v2
         stack.PushInt(result)
     }*/
 

@@ -18,7 +18,7 @@ public class ExceptionTableEntry {
         exceptionTableLength := reader.readUint16()
         exceptionTable := make([]*ExceptionTableEntry, exceptionTableLength)
         for i := range exceptionTable {
-            exceptionTable[i] = &ExceptionTableEntry{
+            exceptionTable[i] = new ExceptionTableEntry{
                 startPc: reader.readUint16(),
                         endPc: reader.readUint16(),
                         handlerPc: reader.readUint16(),

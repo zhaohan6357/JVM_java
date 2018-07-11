@@ -22,9 +22,9 @@ public class CodeAttribute extends AttributeInfo {
     }
     func (self *CodeAttribute) readInfo(reader *ClassReader) {...}*/
     ConstantPool cp;
-    UShort maxStack;
-    UShort maxLocals;
-    byte[] code;
+   public UShort maxStack;
+    public  UShort maxLocals;
+    public byte[] code;
     ExceptionTableEntry[] exceptionTable;
     AttributeInfo[] attributes;
 /*

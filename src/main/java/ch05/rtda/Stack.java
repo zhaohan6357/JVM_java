@@ -19,7 +19,7 @@ public class Stack {
     Frame _top;
 
     /*    func newStack(maxSize uint) *Stack {
-            return &Stack{
+            return new Stack{
                 maxSize: maxSize,
             }
         }*/
@@ -61,7 +61,7 @@ public class Stack {
             return top
         }*/
     public Frame pop() {
-        if (this._top != null) {
+        if (this._top == null) {
             System.out.println("jvm stack is empty");
             return null;
         }

@@ -7,7 +7,7 @@ public class ByteCodeReader {
     /*code []byte
     pc int*/
     byte[] code;
-    int pc;
+    public int pc;
 
     /*func (self *BytecodeReader) Reset(code []byte, pc int) {
         self.code = code

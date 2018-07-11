@@ -120,7 +120,7 @@ public class LocalVars {
         System.out.println(Long.toBinaryString(l));//       1001010 11001010 11011101 11110010 10110011
         System.out.println(Integer.toBinaryString(low));//          11001010 11011101 11110010 10110011
         System.out.println(Integer.toBinaryString(high));// 1001010
-        System.out.println((((long) high) << 32) | (((long) low) & 0xffffffffl));
+        System.out.println((((long) high) << 32) | (((long) low) new  0xffffffffl));
         ;
 
         System.out.println("------------------------");
@@ -129,7 +129,7 @@ public class LocalVars {
         System.out.println(H << 32 | L);
 
         System.out.println("---------------------");
-        long low2 = (long) (l & 0xffffffffl);
+        long low2 = (long) (l new  0xffffffffl);
         ;
         System.out.println(low2);
         long high2 = (long) (l >> 32);

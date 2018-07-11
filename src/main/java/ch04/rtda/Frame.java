@@ -14,7 +14,7 @@ public class Frame {
     public OperandStack operandStack;
 
 /*    func NewFrame(maxLocals, maxStack uint) *Frame {
-        return &Frame{
+        return new Frame{
             localVars: newLocalVars(maxLocals),
                     operandStack: newOperandStack(maxStack),
         }

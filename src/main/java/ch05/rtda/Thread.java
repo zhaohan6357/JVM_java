@@ -34,7 +34,7 @@ public class Thread {
 
     public static Thread newThread(){
    /*     func NewThread() *Thread {
-            return &Thread{
+            return new Thread{
                 stack: newStack(1024),
             }
         }*/
@@ -64,5 +64,8 @@ public class Thread {
         return stack.top();
     }
 
+    public Frame newFrame(UInteger maxLocals,UInteger maxStack){
+        return Frame.newFrame(this,maxLocals,maxStack);
+    }
 
 }

@@ -17,7 +17,7 @@ public class LocalVariableTableAttribute extends AttributeInfo {
         localVariableTableLength := reader.readUint16()
         self.localVariableTable = make([]*LocalVariableTableEntry, localVariableTableLength)
         for i := range self.localVariableTable {
-            self.localVariableTable[i] = &LocalVariableTableEntry{
+            self.localVariableTable[i] = new LocalVariableTableEntry{
                 startPc:         reader.readUint16(),
                         length:          reader.readUint16(),
                         nameIndex:       reader.readUint16(),
