@@ -2,6 +2,8 @@ package ch04.rtda;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.Object;
+
 
 class grandpa{
 
@@ -24,8 +26,7 @@ class LocalVarsTest {
 
     @Test
     void setRef() {
-        grandpa g=new son();
-
-        System.out.println(g.getClass());
+        Object obj=3.43;
+        System.out.println(obj.getClass());
     }
 }

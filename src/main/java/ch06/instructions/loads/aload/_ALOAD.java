@@ -1,7 +1,7 @@
 package ch06.instructions.loads.aload;
 
 import ch06.rtda.Frame;
-import ch06.rtda.Object;
+import ch06.rtda.heap.Object;
 import org.joou.UInteger;
 
 public class _ALOAD {

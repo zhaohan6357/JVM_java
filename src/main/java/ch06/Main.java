@@ -6,6 +6,8 @@ import ch06.classfile.MemberInfo;
 import ch06.classpath.ClassPath;
 import ch06.interpreter.interpreter;
 
+import javax.sound.midi.Soundbank;
+
 /**
  * Hello world!
  */
@@ -13,6 +15,10 @@ public class Main {
 
     public static ClassFile loadClass(String className, ClassPath cp) {
         byte[] classData = cp.ReadClass(className);
+        if(classData.length==0){
+            System.out.println("invalid class file!");
+            System.exit(1);
+        }
         ClassFile classFile = new ClassFile();
         classFile.Parse(classData);
         return classFile;

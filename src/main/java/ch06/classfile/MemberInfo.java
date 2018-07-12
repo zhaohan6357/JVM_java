@@ -64,4 +64,22 @@ public class MemberInfo {
         return null;
     }
 
+    public ConstantValueAttribute ConstantValueAttribute(){
+        for(AttributeInfo attributeInfo:attributes){
+            if(attributeInfo.getClass()==ConstantValueAttribute.class){
+                return (ConstantValueAttribute)attributeInfo;
+            }
+        }
+        return null;
+    }
+    /*func (self *MemberInfo) ConstantValueAttribute() *ConstantValueAttribute {
+        for _, attrInfo := range self.attributes {
+            switch attrInfo.(type) {
+		case *ConstantValueAttribute:
+            return attrInfo.(*ConstantValueAttribute)
+		}
+        }
+        return nil
+    }*/
+
 }

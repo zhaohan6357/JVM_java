@@ -1,7 +1,6 @@
 package ch06.rtda;
 
-import ch06.rtda.Object;
-import ch06.rtda.Slot;
+import ch06.rtda.heap.Object;
 import org.joou.UInteger;
 
 

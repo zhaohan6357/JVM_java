@@ -3,7 +3,7 @@ package ch06.instructions.extended.ifnull;
 import ch06.instructions.base.branch_logic.branch_logic;
 import ch06.instructions.base.instruction.BranchInstruction;
 import ch06.rtda.Frame;
-import ch06.rtda.Object;
+import ch06.rtda.heap.Object;
 
 public class IFNULL extends BranchInstruction {
     /*Type IFNULL struct{ base.BranchInstruction }

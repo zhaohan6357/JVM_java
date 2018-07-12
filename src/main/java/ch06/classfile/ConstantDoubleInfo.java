@@ -5,7 +5,7 @@ import ch06.classfile.ConstantInfo;
 import org.joou.ULong;
 
 public class ConstantDoubleInfo extends ConstantInfo {
-    double val;
+    public double val;
 
     @Override
     public int getType() {

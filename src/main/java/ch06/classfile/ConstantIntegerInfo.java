@@ -5,7 +5,7 @@ import ch06.classfile.ConstantInfo;
 import org.joou.UInteger;
 
 public class ConstantIntegerInfo extends ConstantInfo {
-    int val;
+    public int val;
  /*   func (self *ConstantIntegerInfo) readInfo(reader *ClassReader) {
         bytes := reader.readUint32()
         self.val = int32(bytes)

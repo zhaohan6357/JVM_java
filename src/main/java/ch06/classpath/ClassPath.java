@@ -1,9 +1,5 @@
 package ch06.classpath;
 
-import ch06.classpath.ConstructEntry;
-import ch06.classpath.Entry;
-import ch06.classpath.WildcardEntry;
-
 import java.io.File;
 
 public class ClassPath {
@@ -59,6 +55,7 @@ public class ClassPath {
         byte[] data;
         try {
             if ((data = bootClassPath.readClass(className)).length > 0) {
+                System.out.printf("[Loaded %s from bootClassPath]\n",className);
                 return data;
             }else{
                 throw new Exception();
@@ -66,6 +63,7 @@ public class ClassPath {
         } catch (Exception e) {
             try {
                 if ((data = extClassPath.readClass(className)).length > 0) {
+                    System.out.printf("[Loaded %s from extClassPath]\n",className);
                     return data;
                 }else{
                     throw new Exception();
@@ -73,6 +71,7 @@ public class ClassPath {
             } catch (Exception ee) {
                 try {
                     if ((data = userClassPath.readClass(className)).length > 0) {
+                        System.out.printf("[Loaded %s from userClassPath]\n",className);
                         return data;
                     }
                 } catch (Exception eee) {

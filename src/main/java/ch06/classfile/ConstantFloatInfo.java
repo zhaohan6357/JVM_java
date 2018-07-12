@@ -12,7 +12,7 @@ public class ConstantFloatInfo extends ConstantInfo {
         bytes := reader.readUint32()
         self.val = math.Float32frombits(bytes)
     }*/
-    float val;
+    public float val;
 
     @Override
     public void readInfo(ClassReader reader) {

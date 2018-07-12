@@ -1,6 +1,6 @@
 package ch06.rtda;
 
-import ch06.rtda.Object;
+import ch06.rtda.heap.Object;
 
 public class Slot {
 /*    type Slot struct {

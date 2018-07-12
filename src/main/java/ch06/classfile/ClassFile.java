@@ -40,14 +40,31 @@ public class ClassFile {
         }
         return interNames;
     }
-    public void Parse(byte[] classData){
+
+//    func Parse(classData []byte) (cf *ClassFile, err error) {
+//        defer func() {
+//            if r := recover(); r != nil {
+//                var ok bool
+//                        err, ok = r.(error)
+//                if !ok {
+//                    err = fmt.Errorf("%v", r)
+//                }
+//            }
+//        }()
+//
+//        cr := &ClassReader{classData}
+//        cf = &ClassFile{}
+//        cf.read(cr)
+//        return
+//    }
+    public ClassFile Parse(byte[] classData){
         try {
             ClassReader cr=new ClassReader(classData);
             read(cr);
-
         }catch (Exception e){
             System.out.println("parse failed");
         }
+        return this;
     }
     private void read(ClassReader reader){
          readAndCheckMagic(reader)  ;                 //        self.readAndCheckMagic(reader)

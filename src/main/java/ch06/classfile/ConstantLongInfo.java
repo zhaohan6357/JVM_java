@@ -11,7 +11,7 @@ public class ConstantLongInfo extends ConstantInfo {
     func (self *ConstantLongInfo) readInfo(reader *ClassReader) {
         bytes := reader.readUint64()
         self.val = int64(bytes)*/
-    long val;
+    public long val;
 
     @Override
     public int getType() {

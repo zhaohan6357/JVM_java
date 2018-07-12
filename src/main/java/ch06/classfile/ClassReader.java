@@ -7,7 +7,7 @@ import org.joou.UShort;
 
 import java.nio.ByteBuffer;
 
-import static ch03.JVMUtils.subArray;
+import static ch06.JVMUtils.subArray;
 import static org.joou.Unsigned.*;
 
 public class ClassReader {

@@ -24,6 +24,8 @@ public class ConstantInfo {
     }
     public void readInfo(ClassReader reader){
     }
+
+    //todo 此处需留意 子类或许需要重写这个方法
     public String className(){
         return null;
     }
