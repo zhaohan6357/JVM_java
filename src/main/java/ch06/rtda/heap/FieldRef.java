@@ -3,6 +3,8 @@ package ch06.rtda.heap;
 import ch06.classfile.ConstantFieldrefInfo;
 import ch06.rtda.heap.constant_pool.ConstantPool;
 
+import java.beans.FeatureDescriptor;
+
 public class FieldRef extends MemberRef {
     /* type FieldRef struct {
          MemberRef
@@ -24,4 +26,78 @@ public class FieldRef extends MemberRef {
         ref.copyMemberRefInfo(refInfo);
         return ref;
     }
+
+/*
+    func (self *FieldRef) ResolvedField() *Field {
+        if self.field == nil {
+            self.resolveFieldRef()
+        }
+        return self.field
+    }
+*/
+    public Field ResolvedField(){
+        if(field==null){
+          resolveFieldRef();
+        }
+        return field;
+    }
+
+    public void resolveFieldRef(){
+        Class d=cp.clazz;
+        Class c=ResolvedClass();
+        Field field=lookupField(c,name,descriptor);
+        if(field==null){
+            System.out.println("java.lang.NoSuchFieldError");
+        }
+
+    }
+    /*func (self *FieldRef) resolveFieldRef() {
+        d := self.cp.class
+        c := self.ResolvedClass()
+        field := lookupField(c, self.name, self.descriptor)
+
+        if field == nil {
+            panic("java.lang.NoSuchFieldError")
+        }
+        if !field.isAccessibleTo(d) {
+            panic("java.lang.IllegalAccessError")
+        }
+
+        self.field = field
+    }*/
+
+    /*func lookupField(c *Class, name, descriptor string) *Field {
+        for _, field := range c.fields {
+            if field.name == name && field.descriptor == descriptor {
+                return field
+            }
+        }
+        for _, iface := range c.interfaces {
+            if field := lookupField(iface, name, descriptor); field != nil {
+                return field
+            }
+        }
+        if c.superClass != nil {
+            return lookupField(c.superClass, name, descriptor)
+        }
+    }*/
+    public Field lookupField(Class c,String name,String decriptor){
+        for(Field field:c.fields){
+            if(field.name.equals(name)&&field.descriptor.equals(decriptor)){
+                return field;
+            }
+        }
+        for(Class interfaces:c.interfaces){
+            Field field=lookupField(interfaces,name,decriptor);
+            if(field!=null){
+                return field;
+            }
+        }
+        if(c.superClass!=null){
+            return lookupField(c.superClass,name,decriptor);
+        }
+        return null;
+    }
+
+
 }

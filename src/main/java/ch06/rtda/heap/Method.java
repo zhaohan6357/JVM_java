@@ -11,9 +11,9 @@ public class Method extends ClassMember {
          maxLocals uint
          code      []byte
      }*/
-    UInteger maxStack;
-    UInteger maxLocals;
-    byte[] code;
+    public UInteger maxStack;
+    public UInteger maxLocals;
+    public byte[] code;
 
 /*
     func newMethods(class *Class, cfMethods []*classfile.MemberInfo) []*Method {

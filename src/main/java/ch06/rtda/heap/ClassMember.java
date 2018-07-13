@@ -44,5 +44,35 @@ public class ClassMember {
         return 0 != (accessFlags.intValue()&Access_flags.ACC_SYNTHETIC);
     }
 
+   /* func (self *ClassMember) isAccessibleTo(d *Class) bool {
+        if self.IsPublic() {
+            return true
+        }
+        c := self.class
+        if self.IsProtected() {
+            return d == c || d.isSubClassOf(c) ||
+                    c.getPackageName() == d.getPackageName()
+        }
+        if !self.IsPrivate() {
+            return c.getPackageName() == d.getPackageName()
+        }
+        return d == c
+    }*/
+
+   public boolean isAccessibleTo(Class d){
+       if(IsPublic()){
+           return true;
+       }
+       Class c=clazz;
+       if(IsProtected()){
+           return d==c||d.isSubClassOf(c)||c.getPackageName().equals(d.getPackageName());
+       }
+       if(!IsPrivate()){
+           return c.getPackageName().equals(d.getPackageName());
+       }
+       return d==c;//todo 此处或许应比较name 字符串
+   }
+
+
 
 }

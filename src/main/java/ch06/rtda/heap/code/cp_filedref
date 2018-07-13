@@ -54,3 +54,4 @@ func lookupField(c *Class, name, descriptor string) *Field {
 		return lookupField(c.superClass, name, descriptor)
 	}
 
+}

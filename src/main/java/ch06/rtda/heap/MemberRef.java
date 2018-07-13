@@ -2,7 +2,7 @@ package ch06.rtda.heap;
 
 import ch06.classfile.ConstantMemberrefInfo;
 
-public class MemberRef extends SymRef {
+public class   MemberRef extends SymRef {
     /*type MemberRef struct {
         SymRef
         name       string

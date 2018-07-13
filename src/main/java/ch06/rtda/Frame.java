@@ -3,6 +3,7 @@ package ch06.rtda;
 import ch06.rtda.LocalVars;
 import ch06.rtda.OperandStack;
 import ch06.rtda.Thread;
+import ch06.rtda.heap.Method;
 import org.joou.UInteger;
 
 import java.util.logging.XMLFormatter;
@@ -20,6 +21,7 @@ public class Frame {
     public LocalVars localVars;
     public OperandStack operandStack;
     public Thread thread;
+    public Method method;
     public int nextPC;
 
 /*    func NewFrame(maxLocals, maxStack uint) *Frame {
@@ -28,11 +30,12 @@ public class Frame {
                     operandStack: newOperandStack(maxStack),
         }
     }*/
-    public static ch06.rtda.Frame newFrame(Thread thread, UInteger maxLocals, UInteger maxStack){
+    public static ch06.rtda.Frame newFrame(Thread thread, Method method){
         ch06.rtda.Frame frame=new ch06.rtda.Frame();
         frame.thread=thread;
-        frame.localVars= LocalVars.newLocalVars(maxLocals);
-        frame.operandStack= OperandStack.newOperandStack(maxStack);
+        frame.method=method;
+        frame.localVars= LocalVars.newLocalVars(method.maxLocals);
+        frame.operandStack= OperandStack.newOperandStack(method.maxStack);
         return frame;
     }
 
