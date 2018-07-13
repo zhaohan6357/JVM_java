@@ -42,5 +42,6 @@ public class SymRef {
         if(!c.isAccessibleTo(d)){
             System.out.println("java.lang.IllegalAccessError");
         }
+        this.clazz=c;
     }
 }

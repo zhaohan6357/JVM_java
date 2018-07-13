@@ -3,6 +3,7 @@ package ch06.rtda;
 
 import ch06.rtda.Frame;
 import ch06.rtda.Stack;
+import ch06.rtda.heap.Method;
 import org.joou.UInteger;
 
 import static org.joou.Unsigned.uint;
@@ -66,8 +67,8 @@ public class Thread {
         return stack.top();
     }
 
-    public Frame newFrame(UInteger maxLocals,UInteger maxStack){
-        return Frame.newFrame(this,maxLocals,maxStack);
+    public Frame newFrame(Method method){
+        return Frame.newFrame(this,method);
     }
 
 }

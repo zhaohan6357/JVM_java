@@ -1,59 +1,29 @@
 package ch06;
 
-import ch06.Cmd;
-import ch06.classfile.ClassFile;
-import ch06.classfile.MemberInfo;
 import ch06.classpath.ClassPath;
 import ch06.interpreter.interpreter;
-
-import javax.sound.midi.Soundbank;
+import ch06.rtda.heap.Class;
+import ch06.rtda.heap.ClassLoader;
+import ch06.rtda.heap.Method;
 
 /**
  * Hello world!
  */
 public class Main {
 
-    public static ClassFile loadClass(String className, ClassPath cp) {
-        byte[] classData = cp.ReadClass(className);
-        if(classData.length==0){
-            System.out.println("invalid class file!");
-            System.exit(1);
-        }
-        ClassFile classFile = new ClassFile();
-        classFile.Parse(classData);
-        return classFile;
-    }
-
-
-/*    func startJVM(cmd *Cmd) {
+   /* func startJVM(cmd *Cmd) {
         cp := classpath.Parse(cmd.XjreOption, cmd.cpOption)
+        classLoader := heap.NewClassLoader(cp)
+
         className := strings.Replace(cmd.class, ".", "/", -1)
-        cf := loadClass(className, cp)
-        mainMethod := getMainMethod(cf)
+        mainClass := classLoader.LoadClass(className)
+        mainMethod := mainClass.GetMainMethod()
         if mainMethod != nil {
             interpret(mainMethod)
         } else {
             fmt.Printf("Main method not found in class %s\n", cmd.class)
         }
     }*/
-
-    /*    func getMainMethod(cf *classfile.ClassFile) *classfile.MemberInfo {
-        for _, m := range cf.Methods() {
-            if m.Name() == "main" && m.Descriptor() == "([Ljava/lang/String;)V" {
-                return m
-            }
-        }r
-        eturn nil
-    }*/
-    public static MemberInfo getMainMethod(ClassFile classFile) {
-        for (MemberInfo m : classFile.getMethods()) {
-            if (m.name().equals("main") && m.descripter().equals("([Ljava/lang/String;)V")) {
-                return m;
-            }
-        }
-        return null;
-    }
-
     public static void startJVM(Cmd cmd) {
         ClassPath cp = new ClassPath();
         cp = cp.parse(cmd.XjreOption, cmd.cpOpthion);
@@ -64,11 +34,12 @@ public class Main {
             }
         }
         System.out.println();
-        String name = cmd.className.replace('.', '/');
-        ClassFile cf = loadClass(name, cp);
-        MemberInfo m = getMainMethod(cf);
-        if (m != null) {
-            interpreter.interpret(m);
+        ClassLoader classLoader=ClassLoader.newClassLoader(cp);
+        String className = cmd.className.replace('.', '/');
+        Class mainClass=classLoader.loadClass(className);
+        Method mainMethod=mainClass.getMainMethod();
+        if (mainMethod!= null) {
+            interpreter.interpret(mainMethod);
         } else {
             System.out.println("Main method not found in class");
         }

@@ -206,4 +206,17 @@ public class Class {
     public Object newObject(){
         return Object.newObject(this);
     }
+
+    public Method getMainMethod(){
+        return getStaticMethod("main","([Ljava/lang/String;)V");
+    }
+    public Method getStaticMethod(String name,String descriptor){
+        for(Method method:this.methods){
+            if(method.IsStatic()&&method.name.equals(name)&&method.descriptor.equals(descriptor)){
+                return method;
+            }
+        }
+        return null;
+    }
+
 }

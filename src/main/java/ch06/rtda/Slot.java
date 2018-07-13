@@ -10,6 +10,14 @@ public class Slot {
     public int num;
     public Object ref;
 
+    public Slot(int num, Object ref) {
+        this.num = num;
+        this.ref = ref;
+    }
+
+    public Slot( ) {
+    }
+
     @Override
     public String toString() {
         return "Slot{" +

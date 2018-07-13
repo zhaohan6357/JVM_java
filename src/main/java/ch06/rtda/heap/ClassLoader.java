@@ -75,7 +75,6 @@ public class ClassLoader {
         calcInstanceFieldSlotIds(clazz);
         calcStaticFieldSlotIds(clazz);
         allocAndInitStaticVars(clazz);
-
     }
 
     /* func allocAndInitStaticVars(class *Class) {
@@ -125,7 +124,7 @@ public class ClassLoader {
         ConstantPool cp=clazz.constantPool;
         UInteger cpIndex=field.constValueIndex;
         UInteger slotId=field.slotId;
-        if(cpIndex.intValue()>0){
+        if(cpIndex!=null&&cpIndex.intValue()>0){
             switch (field.descriptor){
                 case "Z":
                 case "B":
@@ -174,7 +173,7 @@ public class ClassLoader {
         UInteger slotId = UInteger.valueOf(0);
         for (int i = 0; i < clazz.fields.length; i++) {
             Field field = clazz.fields[i];
-            if (!field.IsStatic()) {
+            if (field.IsStatic()) {
                 field.slotId = slotId;
                 slotId = slotId.add(1);
                 if (field.isLongOrDouble()) {

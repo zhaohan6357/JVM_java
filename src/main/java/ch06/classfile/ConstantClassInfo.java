@@ -9,7 +9,7 @@ public class ConstantClassInfo extends ConstantInfo {
     public UShort nameIndex;
     ConstantPool cp;
     public ConstantClassInfo(ConstantPool cp) {
-            cp=cp;
+            this.cp=cp;//todo 不加this也错.?
     }
 
     @Override

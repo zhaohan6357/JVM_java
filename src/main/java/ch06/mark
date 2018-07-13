@@ -1,0 +1,8 @@
+1.static的判断 field初始化时    classloader.java  prepare()函数 slotId
+2.constant初始化后才能用 obj  ConstantPool.java line22
+3.popRef的问题  DUP指令后 如果push进去同一个指向Object的ref 那操作一个另一个也会受影响,所以需要深拷贝
+4.constvalueindex的初始化  常量池第一个不用 所以可以初始化为0 或许正因为要初始化为0所以不用?
+  Field.java  里如果constValueIndex不初始化 classLoader.JAVA  initStaticFinalVar 里直接使用cpIndex.intValue会出错
+
+
+

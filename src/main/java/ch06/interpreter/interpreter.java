@@ -8,6 +8,7 @@ import ch06.instructions.base.instruction.Instruction;
 import ch06.instructions.factory.Factory;
 import ch06.rtda.Frame;
 import ch06.rtda.Thread;
+import ch06.rtda.heap.Method;
 import org.joou.UByte;
 import org.joou.UInteger;
 import org.joou.UShort;
@@ -15,41 +16,25 @@ import org.joou.UShort;
 import java.util.Arrays;
 
 public class interpreter {
-    /* func interpret(methodInfo *classfile.MemberInfo) {
-         codeAttr := methodInfo.CodeAttribute()
-         maxLocals := codeAttr.MaxLocals()
-         maxStack := codeAttr.MaxStack()
-         bytecode := codeAttr.Code()
+/*    func interpret(method *heap.Method) {
+        thread := rtda.NewThread()
+        frame := thread.NewFrame(method)
+        thread.PushFrame(frame)
 
-         thread := rtda.NewThread()
-         frame := thread.NewFrame(maxLocals, maxStack)
-         thread.PushFrame(frame)
+        defer catchErr(frame)
+                loop(thread, method.Code())
+    }*/
 
-         defer catchErr(frame)
-                 loop(thread, bytecode)
-     }*/
-    public static void interpret(MemberInfo methodInfo) {
-        CodeAttribute codeAttr = methodInfo.CodeAttribute();
-        UShort maxLocals = codeAttr.maxLocals;
-        UShort maxStack = codeAttr.maxStack;
-        byte[] bytecode = codeAttr.code;
+    public static void interpret(Method method) {
         Thread thread=Thread.newThread();
-        Frame frame=thread.newFrame(UInteger.valueOf(maxLocals.intValue()),
-                UInteger.valueOf(maxStack.intValue()));
+        Frame frame=thread.newFrame(method);
         thread.pushFrame(frame);
-        try{
-            loop(thread,bytecode);
-        }catch (Exception e){
-            catchErr(frame);
-        }
+
+            loop(thread,method.code);
 
 
     }
-    public static void catchErr(Frame frame){
-        System.out.println("LocalVars"+Arrays.toString(frame.localVars.localVars));
-        System.out.println("OperandStack"+Arrays.toString(frame.operandStack.slots));
 
-    }
     /*func catchErr(frame *rtda.Frame) {
         if r := recover(); r != nil {
             fmt.Printf("LocalVars:%v\n", frame.LocalVars())
@@ -90,7 +75,7 @@ public class interpreter {
             inst= Factory.newInstruction(opcode);
             inst.FetchOperands(reader);
             frame.setNextPC(reader.pc);
-            System.out.printf("pc:%2d,  instruction:%s\n",pc,inst.getClass());
+            System.out.printf("pc:%2d,  instruction:%s oprand:%s\n",pc,inst.getClass(),inst.index);
             inst.Execute(frame);
         }
 

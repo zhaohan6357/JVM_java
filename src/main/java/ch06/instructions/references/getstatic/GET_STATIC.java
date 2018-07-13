@@ -28,19 +28,19 @@ public class GET_STATIC extends Index16Instruction {
 
         switch (descriptor.charAt(0)){
             case 'Z': case 'B': case 'C': case 'S': case'I':
-                stack.pushInt(slots.getInt(index));
+                stack.pushInt(slots.getInt(slotId));
                 return;
             case 'F':
-                stack.pushFloat(slots.getFloat(index));
+                stack.pushFloat(slots.getFloat(slotId));
                 return;
             case 'D':
-                stack.pushDouble(slots.getDouble(index));
+                stack.pushDouble(slots.getDouble(slotId));
                 return;
             case 'J':
-                stack.pushLong(slots.getLong(index));
+                stack.pushLong(slots.getLong(slotId));
                 return;
             case 'L': case '[':
-                stack.pushRef(slots.getRef(index));
+                stack.pushRef(slots.getRef(slotId));
                 return;
             default:
                 //todo

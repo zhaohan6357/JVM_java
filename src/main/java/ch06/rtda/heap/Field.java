@@ -10,8 +10,8 @@ public class Field extends ClassMember {
         constValueIndex uint
         slotId          uint
     }*/
-   public  UInteger constValueIndex;
-   public  UInteger slotId;
+    public UInteger constValueIndex = UInteger.valueOf(0);//
+    public UInteger slotId;
 
 
     /* func newFields(class *Class, cfFields []*classfile.MemberInfo) []*Field {
@@ -47,6 +47,7 @@ public class Field extends ClassMember {
             constValueIndex = UInteger.valueOf(valAttr.getConstantValueIndex().intValue());
         }
     }
+
     /*func (self *Field) isLongOrDouble() bool {
         return self.descriptor == "J" || self.descriptor == "D"
     }
@@ -60,17 +61,19 @@ func (self *Field) IsEnum() bool {
 	return 0 != self.accessFlags&ACC_ENUM
 }
     */
-    public boolean isLongOrDouble(){
-        return descriptor.equals("J")||descriptor.equals("D");
+    public boolean isLongOrDouble() {
+        return descriptor.equals("J") || descriptor.equals("D");
     }
 
-    public boolean isVolatile(){
-        return 0!=(accessFlags.intValue()&(Access_flags.ACC_VOLATILE));
+    public boolean isVolatile() {
+        return 0 != (accessFlags.intValue() & (Access_flags.ACC_VOLATILE));
     }
-    public boolean isTransient(){
-        return 0!=(accessFlags.intValue()&(Access_flags.ACC_TRANSIENT));
+
+    public boolean isTransient() {
+        return 0 != (accessFlags.intValue() & (Access_flags.ACC_TRANSIENT));
     }
-    public boolean isEnum(){
-        return 0!=(accessFlags.intValue()&(Access_flags.ACC_ENUM));
+
+    public boolean isEnum() {
+        return 0 != (accessFlags.intValue() & (Access_flags.ACC_ENUM));
     }
 }

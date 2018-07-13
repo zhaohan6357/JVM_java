@@ -27,7 +27,8 @@ public class DUP extends NoOperandsInstruction {
     @Override
     public void Execute(Frame frame) {
         Slot slot=frame.operandStack.popSlot();
+        Slot slot1=new Slot(slot.num,slot.ref);
         frame.operandStack.pushSlot(slot);
-        frame.operandStack.pushSlot(slot);
+        frame.operandStack.pushSlot(slot1);//todo mark
     }
 }

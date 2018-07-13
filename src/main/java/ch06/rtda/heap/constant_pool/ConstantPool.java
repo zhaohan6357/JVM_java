@@ -5,6 +5,8 @@ import ch06.rtda.heap.*;
 import ch06.rtda.heap.Class;
 import org.joou.UInteger;
 
+import java.lang.Object;
+
 public class ConstantPool {
     public Class clazz;
     public Constant[] consts;
@@ -17,6 +19,7 @@ public class ConstantPool {
         constantPool.consts = consts;
         for (int i = 1; i < cpCount; i++) {
             ConstantInfo cpInfo = cfCp.constantPool[i];
+            consts[i]=new Constant();
             if (cpInfo.getClass() == ConstantIntegerInfo.class) {
                 ConstantIntegerInfo integerInfo = (ConstantIntegerInfo) cpInfo;
                 consts[i].object=integerInfo.val;

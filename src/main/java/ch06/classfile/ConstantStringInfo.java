@@ -9,7 +9,7 @@ public class ConstantStringInfo extends ConstantInfo {
     ConstantPool cp;
     UShort stringIndex;
     public ConstantStringInfo(ConstantPool cp) {
-        cp=cp;
+        this.cp=cp;
     }
 
     @Override

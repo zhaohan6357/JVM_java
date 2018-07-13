@@ -30,9 +30,10 @@ public class DUP_X2 extends NoOperandsInstruction {
     @Override
     public void Execute(Frame frame) {
         Slot slot1=frame.operandStack.popSlot();
+        Slot slot11=new Slot(slot1.num,slot1.ref);
         Slot slot2=frame.operandStack.popSlot();
         Slot slot3=frame.operandStack.popSlot();
-        frame.operandStack.pushSlot(slot1);
+        frame.operandStack.pushSlot(slot11);
         frame.operandStack.pushSlot(slot3);
         frame.operandStack.pushSlot(slot2);
         frame.operandStack.pushSlot(slot1);

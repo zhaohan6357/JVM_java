@@ -11,6 +11,9 @@ import ch06.instructions.comparisons.lcmp.LCMP;
 import ch06.instructions.constants.const_.*;
 import ch06.instructions.constants.ipush.BIPUSH;
 import ch06.instructions.constants.ipush.SIPUSH;
+import ch06.instructions.constants.ldc.LDC;
+import ch06.instructions.constants.ldc.LDC2_W;
+import ch06.instructions.constants.ldc.LDC_W;
 import ch06.instructions.constants.nop.NOP;
 import ch06.instructions.control.goto_.GOTO;
 import ch06.instructions.control.lookupswitch.LOOKUP_SWITCH;
@@ -66,6 +69,15 @@ import ch06.instructions.math.sub.ISUB;
 import ch06.instructions.math.sub.LSUB;
 import ch06.instructions.math.xor.IXOR;
 import ch06.instructions.math.xor.LXOR;
+import ch06.instructions.references.checkcast.CHECK_CAST;
+import ch06.instructions.references.getfield.GET_FIELD;
+import ch06.instructions.references.getstatic.GET_STATIC;
+import ch06.instructions.references.instanceof_.INSTANCE_OF;
+import ch06.instructions.references.invokespecial.INVOKE_SPECIAL;
+import ch06.instructions.references.invokevirtual.INVOKE_VIRTUAL;
+import ch06.instructions.references.new_.NEW;
+import ch06.instructions.references.putfield.PUT_FIELD;
+import ch06.instructions.references.putstatic.PUT_STATIC;
 import ch06.instructions.stack.dup.*;
 import ch06.instructions.stack.pop.POP;
 import ch06.instructions.stack.pop.POP2;
@@ -269,12 +281,12 @@ public class Factory {
                 return new BIPUSH();
             case 0x11:
                 return new SIPUSH();
-            // case 0x12:
-            // 	return new LDC();
-            // case 0x13:
-            // 	return new LDC_W();
-            // case 0x14:
-            // 	return new LDC2_W();
+             case 0x12:
+             	return new LDC();
+             case 0x13:
+             	return new LDC_W();
+             case 0x14:
+             	return new LDC2_W();
             case 0x15:
                 return new ILOAD();
             case 0x16:
@@ -589,26 +601,26 @@ public class Factory {
             // 	return areturn
             // case 0xb1:
             // 	return _return
-            //	case 0xb2:
-            //		return new GET_STATIC();
-            // case 0xb3:
-            // 	return new PUT_STATIC();
-            // case 0xb4:
-            // 	return new GET_FIELD();
-            // case 0xb5:
-            // 	return new PUT_FIELD();
-            //	case 0xb6:
-            //		return new INVOKE_VIRTUAL();
-            // case 0xb7:
-            // 	return new INVOKE_SPECIAL();
+            	case 0xb2:
+            		return new GET_STATIC();
+             case 0xb3:
+             	return new PUT_STATIC();
+             case 0xb4:
+             	return new GET_FIELD();
+             case 0xb5:
+             	return new PUT_FIELD();
+            	case 0xb6:
+            		return new INVOKE_VIRTUAL();
+             case 0xb7:
+             	return new INVOKE_SPECIAL();
             // case 0xb8:
             // 	return new INVOKE_STATIC();
             // case 0xb9:
             // 	return new INVOKE_INTERFACE();
             // case 0xba:
             // 	return new INVOKE_DYNAMIC();
-            // case 0xbb:
-            // 	return new NEW();
+             case 0xbb:
+             	return new NEW();
             // case 0xbc:
             // 	return new NEW_ARRAY();
             // case 0xbd:
@@ -617,10 +629,10 @@ public class Factory {
             // 	return arraylength
             // case 0xbf:
             // 	return athrow
-            // case 0xc0:
-            // 	return new CHECK_CAST();
-            // case 0xc1:
-            // 	return new INSTANCE_OF();
+             case 0xc0:
+             	return new CHECK_CAST();
+             case 0xc1:
+             	return new INSTANCE_OF();
             // case 0xc2:
             // 	return monitorenter
             // case 0xc3:

@@ -49,6 +49,7 @@ public class FieldRef extends MemberRef {
         if(field==null){
             System.out.println("java.lang.NoSuchFieldError");
         }
+        this.field=field;
 
     }
     /*func (self *FieldRef) resolveFieldRef() {

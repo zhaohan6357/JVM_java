@@ -90,6 +90,9 @@ public class ClassFile {
         }*/
         int attributesCount=reader.readUInt16().intValue();
         AttributeInfo[] attributes=new AttributeInfo[attributesCount];
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+//        System.out.println(attributesCount);
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
         for(int i=0;i<attributesCount;i++){
             attributes[i]=readAttribute(reader,constantPool);
         }
