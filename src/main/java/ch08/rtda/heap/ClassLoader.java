@@ -2,14 +2,9 @@ package ch08.rtda.heap;
 
 import ch08.classfile.ClassFile;
 import ch08.classpath.ClassPath;
-import ch08.rtda.Slot;
-import ch08.rtda.heap.Class;
-import ch08.rtda.heap.Field;
-import ch08.rtda.heap.Slots;
 import ch08.rtda.heap.constant_pool.ConstantPool;
 import org.joou.UInteger;
-import org.joou.UShort;
-
+import org.joou.UShort;;
 import java.util.HashMap;
 
 public class ClassLoader {
@@ -159,7 +154,9 @@ public class ClassLoader {
                     vars.setDouble(slotId,dval);
                     return;
                 case  "Ljava/lang/String;":
-                    System.out.println("todo");
+                    String str=(String)(cp.getConstant(cpIndex).object);
+                    Object jStr=StringPool.JString(clazz.loader,str);
+                    vars.setRef(slotId,jStr);
                     return ;
 
             }

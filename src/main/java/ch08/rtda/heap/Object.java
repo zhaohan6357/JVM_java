@@ -3,6 +3,8 @@ package ch08.rtda.heap;
 import ch08.rtda.heap.Class;
 import ch08.rtda.heap.Slots;
 
+import java.io.File;
+
 public class Object {
     public Class clazz;
     public java.lang.Object data;
@@ -75,7 +77,18 @@ public class Object {
             System.out.println("no array!");
         }
         return 0;
+    }
 
+    public Object getRefVar(String name,String descriptor){
+        Field field=this.clazz.getField(name,descriptor,false);
+        Slots slots=(Slots)this.data;
+        return slots.getRef(field.slotId);
+    }
+
+    public void setRefVar(String name,String descriptor,Object ref){
+        Field filed=this.clazz.getField(name,descriptor,false);
+        Slots slots=(Slots)this.data;
+        slots.setRef(filed.slotId,ref);
     }
 
 }

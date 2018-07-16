@@ -7,6 +7,8 @@ import ch08.instructions.comparisons.fcmp.FCMPG;
 import ch08.instructions.comparisons.fcmp.FCMPL;
 import ch08.instructions.comparisons.if_acmp.IF_ACMPEQ;
 import ch08.instructions.comparisons.if_acmp.IF_ACMPNE;
+import ch08.instructions.comparisons.if_icmp.*;
+import ch08.instructions.comparisons.ifcond.*;
 import ch08.instructions.comparisons.lcmp.LCMP;
 import ch08.instructions.constants.const_.*;
 import ch08.instructions.constants.ipush.BIPUSH;
@@ -38,6 +40,12 @@ import ch08.instructions.loads.dload.*;
 import ch08.instructions.loads.fload.*;
 import ch08.instructions.loads.iload.*;
 import ch08.instructions.loads.lload.*;
+import ch08.instructions.loads.xaload.*;
+import ch08.instructions.references.anewarray.ANEW_ARRAY;
+import ch08.instructions.references.arraylength.ARRAY_LENGTH;
+import ch08.instructions.references.multianewarray.MULTI_ANEW_ARRAY;
+import ch08.instructions.references.newArray.NEW_ARRAY;
+import ch08.instructions.stores.xastore.*;
 import ch08.instructions.math.add.DADD;
 import ch08.instructions.math.add.FADD;
 import ch08.instructions.math.add.IADD;
@@ -90,56 +98,54 @@ import ch08.instructions.stores.dstore.*;
 import ch08.instructions.stores.fstore.*;
 import ch08.instructions.stores.istore.*;
 import ch08.instructions.stores.lscore.*;
-import ch08.instructions.comparisons.if_icmp.*;
-import ch08.instructions.comparisons.ifcond.*;
 import org.joou.UByte;
 
 public class Factory {
 
-   public static Instruction nop         = new NOP();
-   public static Instruction aconst_null = new ACONST_NULL();
-   public static Instruction iconst_m1   = new ICONST_M1();
-   public static Instruction iconst_0    = new ICONST_0();
-   public static Instruction iconst_1    = new ICONST_1();
-   public static Instruction iconst_2    = new ICONST_2();
-   public static Instruction iconst_3    = new ICONST_3();
-   public static Instruction iconst_4    = new ICONST_4();
-   public static Instruction iconst_5    = new ICONST_5();
-   public static Instruction lconst_0    = new LCONST_0();
-   public static Instruction lconst_1    = new LCONST_1();
-   public static Instruction fconst_0    = new FCONST_0();
-   public static Instruction fconst_1    = new FCONST_1();
-   public static Instruction fconst_2    = new FCONST_2();
-   public static Instruction dconst_0    = new DCONST_0();
-   public static Instruction dconst_1    = new DCONST_1();
-   public static Instruction iload_0     = new ILOAD_0();
-   public static Instruction iload_1     = new ILOAD_1();
-   public static Instruction iload_2     = new ILOAD_2();
-   public static Instruction iload_3     = new ILOAD_3();
-   public static Instruction lload_0     = new LLOAD_0();
-   public static Instruction lload_1     = new LLOAD_1();
-   public static Instruction lload_2     = new LLOAD_2();
-   public static Instruction lload_3     = new LLOAD_3();
-   public static Instruction fload_0     = new FLOAD_0();
-   public static Instruction fload_1     = new FLOAD_1();
-   public static Instruction fload_2     = new FLOAD_2();
-   public static Instruction fload_3     = new FLOAD_3();
-   public static Instruction dload_0     = new DLOAD_0();
-   public static Instruction dload_1     = new DLOAD_1();
-   public static Instruction dload_2     = new DLOAD_2();
-   public static Instruction dload_3     = new DLOAD_3();
-   public static Instruction aload_0     = new ALOAD_0();
-   public static Instruction aload_1     = new ALOAD_1();
-   public static Instruction aload_2     = new ALOAD_2();
-   public static Instruction aload_3     = new ALOAD_3();
-    // public static Instruction iaload      = new IALOAD();
-    // public static Instruction laload      = new LALOAD();
-    // public static Instruction faload      = new FALOAD();
-    // public static Instruction daload      = new DALOAD();
-    // public static Instruction aaload      = new AALOAD();
-    // public static Instruction baload      = new BALOAD();
-    // public static Instruction caload      = new CALOAD();
-    // public static Instruction saload      = new SALOAD();
+    public static Instruction nop = new NOP();
+    public static Instruction aconst_null = new ACONST_NULL();
+    public static Instruction iconst_m1 = new ICONST_M1();
+    public static Instruction iconst_0 = new ICONST_0();
+    public static Instruction iconst_1 = new ICONST_1();
+    public static Instruction iconst_2 = new ICONST_2();
+    public static Instruction iconst_3 = new ICONST_3();
+    public static Instruction iconst_4 = new ICONST_4();
+    public static Instruction iconst_5 = new ICONST_5();
+    public static Instruction lconst_0 = new LCONST_0();
+    public static Instruction lconst_1 = new LCONST_1();
+    public static Instruction fconst_0 = new FCONST_0();
+    public static Instruction fconst_1 = new FCONST_1();
+    public static Instruction fconst_2 = new FCONST_2();
+    public static Instruction dconst_0 = new DCONST_0();
+    public static Instruction dconst_1 = new DCONST_1();
+    public static Instruction iload_0 = new ILOAD_0();
+    public static Instruction iload_1 = new ILOAD_1();
+    public static Instruction iload_2 = new ILOAD_2();
+    public static Instruction iload_3 = new ILOAD_3();
+    public static Instruction lload_0 = new LLOAD_0();
+    public static Instruction lload_1 = new LLOAD_1();
+    public static Instruction lload_2 = new LLOAD_2();
+    public static Instruction lload_3 = new LLOAD_3();
+    public static Instruction fload_0 = new FLOAD_0();
+    public static Instruction fload_1 = new FLOAD_1();
+    public static Instruction fload_2 = new FLOAD_2();
+    public static Instruction fload_3 = new FLOAD_3();
+    public static Instruction dload_0 = new DLOAD_0();
+    public static Instruction dload_1 = new DLOAD_1();
+    public static Instruction dload_2 = new DLOAD_2();
+    public static Instruction dload_3 = new DLOAD_3();
+    public static Instruction aload_0 = new ALOAD_0();
+    public static Instruction aload_1 = new ALOAD_1();
+    public static Instruction aload_2 = new ALOAD_2();
+    public static Instruction aload_3 = new ALOAD_3();
+    public static Instruction iaload = new IALOAD();
+    public static Instruction laload = new LALOAD();
+    public static Instruction faload = new FALOAD();
+    public static Instruction daload = new DALOAD();
+    public static Instruction aaload = new AALOAD();
+    public static Instruction baload = new BALOAD();
+    public static Instruction caload = new CALOAD();
+    public static Instruction saload = new SALOAD();
     public static Instruction istore_0 = new ISTORE_0();
     public static Instruction istore_1 = new ISTORE_1();
     public static Instruction istore_2 = new ISTORE_2();
@@ -160,93 +166,93 @@ public class Factory {
     public static Instruction astore_1 = new ASTORE_1();
     public static Instruction astore_2 = new ASTORE_2();
     public static Instruction astore_3 = new ASTORE_3();
-    // public static Instruction iastore  = new IASTORE();
-    // public static Instruction lastore  = new LASTORE();
-    // public static Instruction fastore  = new FASTORE();
-    // public static Instruction dastore  = new DASTORE();
-    // public static Instruction aastore  = new AASTORE();
-    // public static Instruction bastore  = new BASTORE();
-    // public static Instruction castore  = new CASTORE();
-    // public static Instruction sastore  = new SASTORE();
-    public static Instruction pop     = new POP();
-    public static Instruction pop2    = new POP2();
-    public static Instruction dup     = new DUP();
-    public static Instruction dup_x1  = new DUP_X1();
-    public static Instruction dup_x2  = new DUP_X2();
-    public static Instruction dup2    = new DUP2();
+     public static Instruction iastore  = new IASTORE();
+     public static Instruction lastore  = new LASTORE();
+     public static Instruction fastore  = new FASTORE();
+     public static Instruction dastore  = new DASTORE();
+     public static Instruction aastore  = new AASTORE();
+     public static Instruction bastore  = new BASTORE();
+     public static Instruction castore  = new CASTORE();
+     public static Instruction sastore  = new SASTORE();
+    public static Instruction pop = new POP();
+    public static Instruction pop2 = new POP2();
+    public static Instruction dup = new DUP();
+    public static Instruction dup_x1 = new DUP_X1();
+    public static Instruction dup_x2 = new DUP_X2();
+    public static Instruction dup2 = new DUP2();
     public static Instruction dup2_x1 = new DUP2_X1();
     public static Instruction dup2_x2 = new DUP2_X2();
-    public static Instruction swap    = new SWAP();
-    public static Instruction iadd    = new IADD();
-    public static Instruction ladd    = new LADD();
-    public static Instruction fadd    = new FADD();
-    public static Instruction dadd    = new DADD();
-    public static Instruction isub    = new ISUB();
-    public static Instruction lsub    = new LSUB();
-    public static Instruction fsub    = new FSUB();
-    public static Instruction dsub    = new DSUB();
-    public static Instruction imul    = new IMUL();
-    public static Instruction lmul    = new LMUL();
-    public static Instruction fmul    = new FMUL();
-    public static Instruction dmul    = new DMUL();
-    public static Instruction idiv    = new IDIV();
-    public static Instruction ldiv    = new LDIV();
-    public static Instruction fdiv    = new FDIV();
-    public static Instruction ddiv    = new DDIV();
-    public static Instruction irem    = new IREM();
-    public static Instruction lrem    = new LREM();
-    public static Instruction frem    = new FREM();
-    public static Instruction drem    = new DREM();
-    public static Instruction ineg    = new INEG();
-    public static Instruction lneg    = new LNEG();
-    public static Instruction fneg    = new FNEG();
-    public static Instruction dneg    = new DNEG();
-    public static Instruction ishl    = new ISHL();
-    public static Instruction lshl    = new LSHL();
-    public static Instruction ishr    = new ISHR();
-    public static Instruction lshr    = new LSHR();
-    public static Instruction iushr   = new IUSHR();
-    public static Instruction lushr   = new LUSHR();
-    public static Instruction iand    = new IAND();
-    public static Instruction land    = new LAND();
-    public static Instruction ior     = new IOR();
-    public static Instruction lor     = new LOR();
-    public static Instruction ixor    = new IXOR();
-    public static Instruction lxor    = new LXOR();
-    public static Instruction i2l     = new I2L();
-    public static Instruction i2f     = new I2F();
-    public static Instruction i2d     = new I2D();
-    public static Instruction l2i     = new L2I();
-    public static Instruction l2f     = new L2F();
-    public static Instruction l2d     = new L2D();
-    public static Instruction f2i     = new F2I();
-    public static Instruction f2l     = new F2L();
-    public static Instruction f2d     = new F2D();
-    public static Instruction d2i     = new D2I();
-    public static Instruction d2l     = new D2L();
-    public static Instruction d2f     = new D2F();
-    public static Instruction i2b     = new I2B();
-    public static Instruction i2c     = new I2C();
-    public static Instruction i2s     = new I2S();
-    public static Instruction lcmp    = new LCMP();
-    public static Instruction fcmpl   = new FCMPL();
-    public static Instruction fcmpg   = new FCMPG();
-    public static Instruction dcmpl   = new DCMPL();
-    public static Instruction dcmpg   = new DCMPG();
-     public static Instruction ireturn = new IRETURN();
-     public static Instruction lreturn = new LRETURN();
-     public static Instruction freturn = new FRETURN();
-     public static Instruction dreturn = new DRETURN();
-     public static Instruction areturn = new ARETURN();
-     public static Instruction _return = new RETURN();
-    // public static Instruction arraylength   = new ARRAY_LENGTH();
+    public static Instruction swap = new SWAP();
+    public static Instruction iadd = new IADD();
+    public static Instruction ladd = new LADD();
+    public static Instruction fadd = new FADD();
+    public static Instruction dadd = new DADD();
+    public static Instruction isub = new ISUB();
+    public static Instruction lsub = new LSUB();
+    public static Instruction fsub = new FSUB();
+    public static Instruction dsub = new DSUB();
+    public static Instruction imul = new IMUL();
+    public static Instruction lmul = new LMUL();
+    public static Instruction fmul = new FMUL();
+    public static Instruction dmul = new DMUL();
+    public static Instruction idiv = new IDIV();
+    public static Instruction ldiv = new LDIV();
+    public static Instruction fdiv = new FDIV();
+    public static Instruction ddiv = new DDIV();
+    public static Instruction irem = new IREM();
+    public static Instruction lrem = new LREM();
+    public static Instruction frem = new FREM();
+    public static Instruction drem = new DREM();
+    public static Instruction ineg = new INEG();
+    public static Instruction lneg = new LNEG();
+    public static Instruction fneg = new FNEG();
+    public static Instruction dneg = new DNEG();
+    public static Instruction ishl = new ISHL();
+    public static Instruction lshl = new LSHL();
+    public static Instruction ishr = new ISHR();
+    public static Instruction lshr = new LSHR();
+    public static Instruction iushr = new IUSHR();
+    public static Instruction lushr = new LUSHR();
+    public static Instruction iand = new IAND();
+    public static Instruction land = new LAND();
+    public static Instruction ior = new IOR();
+    public static Instruction lor = new LOR();
+    public static Instruction ixor = new IXOR();
+    public static Instruction lxor = new LXOR();
+    public static Instruction i2l = new I2L();
+    public static Instruction i2f = new I2F();
+    public static Instruction i2d = new I2D();
+    public static Instruction l2i = new L2I();
+    public static Instruction l2f = new L2F();
+    public static Instruction l2d = new L2D();
+    public static Instruction f2i = new F2I();
+    public static Instruction f2l = new F2L();
+    public static Instruction f2d = new F2D();
+    public static Instruction d2i = new D2I();
+    public static Instruction d2l = new D2L();
+    public static Instruction d2f = new D2F();
+    public static Instruction i2b = new I2B();
+    public static Instruction i2c = new I2C();
+    public static Instruction i2s = new I2S();
+    public static Instruction lcmp = new LCMP();
+    public static Instruction fcmpl = new FCMPL();
+    public static Instruction fcmpg = new FCMPG();
+    public static Instruction dcmpl = new DCMPL();
+    public static Instruction dcmpg = new DCMPG();
+    public static Instruction ireturn = new IRETURN();
+    public static Instruction lreturn = new LRETURN();
+    public static Instruction freturn = new FRETURN();
+    public static Instruction dreturn = new DRETURN();
+    public static Instruction areturn = new ARETURN();
+    public static Instruction _return = new RETURN();
+    public static Instruction arraylength   = new ARRAY_LENGTH();
     // public static Instruction athrow        = new ATHROW();
     // public static Instruction monitorenter  = new MONITOR_ENTER();
     // public static Instruction monitorexit   = new MONITOR_EXIT();
     // public static Instruction invoke_native = new INVOKE_NATIVE();
 
 
-    public static Instruction newInstruction(UByte opcode){
+    public static Instruction newInstruction(UByte opcode) {
         switch (opcode.intValue()) {
             case 0x00:
                 return nop;
@@ -284,12 +290,12 @@ public class Factory {
                 return new BIPUSH();
             case 0x11:
                 return new SIPUSH();
-             case 0x12:
-             	return new LDC();
-             case 0x13:
-             	return new LDC_W();
-             case 0x14:
-             	return new LDC2_W();
+            case 0x12:
+                return new LDC();
+            case 0x13:
+                return new LDC_W();
+            case 0x14:
+                return new LDC2_W();
             case 0x15:
                 return new ILOAD();
             case 0x16:
@@ -340,22 +346,22 @@ public class Factory {
                 return aload_2;
             case 0x2d:
                 return aload_3;
-            // case 0x2e:
-            // 	return iaload
-            // case 0x2f:
-            // 	return laload
-            // case 0x30:
-            // 	return faload
-            // case 0x31:
-            // 	return daload
-            // case 0x32:
-            // 	return aaload
-            // case 0x33:
-            // 	return baload
-            // case 0x34:
-            // 	return caload
-            // case 0x35:
-            // 	return saload
+             case 0x2e:
+             	return iaload;
+             case 0x2f:
+             	return laload;
+             case 0x30:
+             	return faload;
+             case 0x31:
+             	return daload;
+             case 0x32:
+             	return aaload;
+             case 0x33:
+             	return baload;
+             case 0x34:
+             	return caload;
+             case 0x35:
+             	return saload;
             case 0x36:
                 return new ISTORE();
             case 0x37:
@@ -406,22 +412,22 @@ public class Factory {
                 return astore_2;
             case 0x4e:
                 return astore_3;
-            // case 0x4f:
-            // 	return iastore;
-            // case 0x50:
-            // 	return lastore;
-            // case 0x51:
-            // 	return fastore;
-            // case 0x52:
-            // 	return dastore;
-            // case 0x53:
-            // 	return aastore;
-            // case 0x54:
-            // 	return bastore;
-            // case 0x55:
-            // 	return castore;
-            // case 0x56:
-            // 	return sastore;
+             case 0x4f:
+             	return iastore;
+             case 0x50:
+             	return lastore;
+             case 0x51:
+             	return fastore;
+             case 0x52:
+             	return dastore;
+             case 0x53:
+             	return aastore;
+             case 0x54:
+             	return bastore;
+             case 0x55:
+             	return castore;
+             case 0x56:
+             	return sastore;
             case 0x57:
                 return pop;
             case 0x58:
@@ -592,58 +598,58 @@ public class Factory {
                 return new TABLE_SWITCH();
             case 0xab:
                 return new LOOKUP_SWITCH();
-             case 0xac:
-             	return ireturn;
-             case 0xad:
-             	return lreturn;
-             case 0xae:
-             	return freturn;
-             case 0xaf:
-             	return dreturn;
-             case 0xb0:
-             	return areturn;
-             case 0xb1:
-             	return _return;
-            	case 0xb2:
-            		return new GET_STATIC();
-             case 0xb3:
-             	return new PUT_STATIC();
-             case 0xb4:
-             	return new GET_FIELD();
-             case 0xb5:
-             	return new PUT_FIELD();
-            	case 0xb6:
-            		return new INVOKE_VIRTUAL();
-             case 0xb7:
-             	return new INVOKE_SPECIAL();
-             case 0xb8:
-             	return new INVOKE_STATIC();
-             case 0xb9:
-             	return new INVOKE_INTERFACE();
+            case 0xac:
+                return ireturn;
+            case 0xad:
+                return lreturn;
+            case 0xae:
+                return freturn;
+            case 0xaf:
+                return dreturn;
+            case 0xb0:
+                return areturn;
+            case 0xb1:
+                return _return;
+            case 0xb2:
+                return new GET_STATIC();
+            case 0xb3:
+                return new PUT_STATIC();
+            case 0xb4:
+                return new GET_FIELD();
+            case 0xb5:
+                return new PUT_FIELD();
+            case 0xb6:
+                return new INVOKE_VIRTUAL();
+            case 0xb7:
+                return new INVOKE_SPECIAL();
+            case 0xb8:
+                return new INVOKE_STATIC();
+            case 0xb9:
+                return new INVOKE_INTERFACE();
             // case 0xba:
             // 	return new INVOKE_DYNAMIC();
-             case 0xbb:
-             	return new NEW();
-            // case 0xbc:
-            // 	return new NEW_ARRAY();
-            // case 0xbd:
-            // 	return new ANEW_ARRAY();
-            // case 0xbe:
-            // 	return arraylength
+            case 0xbb:
+                return new NEW();
+             case 0xbc:
+             	return new NEW_ARRAY();
+             case 0xbd:
+             	return new ANEW_ARRAY();
+             case 0xbe:
+             	return arraylength;
             // case 0xbf:
             // 	return athrow
-             case 0xc0:
-             	return new CHECK_CAST();
-             case 0xc1:
-             	return new INSTANCE_OF();
+            case 0xc0:
+                return new CHECK_CAST();
+            case 0xc1:
+                return new INSTANCE_OF();
             // case 0xc2:
             // 	return monitorenter
             // case 0xc3:
             // 	return monitorexit
             case 0xc4:
                 return new WIDE();
-            // case 0xc5:
-            // 	return new MULTI_ANEW_ARRAY();
+             case 0xc5:
+             	return new MULTI_ANEW_ARRAY();
             case 0xc6:
                 return new IFNULL();
             case 0xc7:
@@ -655,7 +661,7 @@ public class Factory {
             // case 0xca: breakpoint
             // case 0xfe: impdep1
             // case 0xff: impdep2
-            default:{
+            default: {
                 System.out.println("Unsupported opcode");
                 return null;
             }

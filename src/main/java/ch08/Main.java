@@ -11,19 +11,6 @@ import ch08.rtda.heap.Method;
  */
 public class Main {
 
-   /* func startJVM(cmd *Cmd) {
-        cp := classpath.Parse(cmd.XjreOption, cmd.cpOption)
-        classLoader := heap.NewClassLoader(cp)
-
-        className := strings.Replace(cmd.class, ".", "/", -1)
-        mainClass := classLoader.LoadClass(className)
-        mainMethod := mainClass.GetMainMethod()
-        if mainMethod != nil {
-            interpret(mainMethod)
-        } else {
-            fmt.Printf("Main method not found in class %s\n", cmd.class)
-        }
-    }*/
     public static void startJVM(Cmd cmd) {
         ClassPath cp = new ClassPath();
         cp = cp.parse(cmd.XjreOption, cmd.cpOpthion);
@@ -39,7 +26,7 @@ public class Main {
         Class mainClass=classLoader.loadClass(className);
         Method mainMethod=mainClass.getMainMethod();
         if (mainMethod!= null) {
-            interpreter.interpret(mainMethod,cmd.verboseInstFlag);
+            interpreter.interpret(mainMethod,cmd.verboseInstFlag,cmd.args);
         } else {
             System.out.println("Main method not found in class");
         }

@@ -2,6 +2,7 @@ package ch08;
 
 import org.apache.commons.cli.*;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Cmd {
     boolean verboseClassFlag=false;
     boolean verboseInstFlag=false;
     List<String> arg=new LinkedList<>();
+    String[] args;
     void cmdParse(String[] args ){
         CommandLineParser parser = new BasicParser( );
         Options options = new Options( );
@@ -61,6 +63,8 @@ public class Cmd {
         if(ars.size()>0){
             className=ars.get(0);
             arg=ars.subList(1,ars.size());
+            this.args=new String[arg.size()];
+            arg.toArray(this.args);
         }
 
     }

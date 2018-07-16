@@ -6,7 +6,7 @@ import ch08.rtda.Frame;
 import ch08.rtda.OperandStack;
 import ch08.rtda.heap.Object;
 
-public class CASOTRE extends NoOperandsInstruction {
+public class CASTORE extends NoOperandsInstruction {
     @Override
     public void Execute(Frame frame) {
         OperandStack stack=frame.operandStack;

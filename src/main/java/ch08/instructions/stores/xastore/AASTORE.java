@@ -6,17 +6,17 @@ import ch08.rtda.Frame;
 import ch08.rtda.OperandStack;
 import ch08.rtda.heap.Object;
 
-public class BASOTRE extends NoOperandsInstruction{
+public class AASTORE extends NoOperandsInstruction {
     @Override
     public void Execute(Frame frame) {
         OperandStack stack=frame.operandStack;
-        int ref=stack.popInt();
+        Object ref=stack.popRef();
         int index=stack.popInt();
         Object arrRef=stack.popRef();
 
         CHECK.checkNotNull(arrRef);
-        byte[] refs=arrRef.Bytes();
+        Object[] refs=arrRef.Refs();
         CHECK.checkIndex(refs.length,index);
-        refs[index]=(byte)ref;
+        refs[index]=ref;
     }
 }

@@ -6,16 +6,16 @@ import ch08.rtda.Frame;
 import ch08.rtda.OperandStack;
 import ch08.rtda.heap.Object;
 
-public class AASOTRE extends NoOperandsInstruction {
+public class FASTORE extends NoOperandsInstruction {
     @Override
     public void Execute(Frame frame) {
         OperandStack stack=frame.operandStack;
-        Object ref=stack.popRef();
+        float ref=stack.popFloat();
         int index=stack.popInt();
         Object arrRef=stack.popRef();
 
         CHECK.checkNotNull(arrRef);
-        Object[] refs=arrRef.Refs();
+        float[] refs=arrRef.Floats();
         CHECK.checkIndex(refs.length,index);
         refs[index]=ref;
     }

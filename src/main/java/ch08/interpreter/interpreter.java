@@ -9,7 +9,10 @@ import ch08.instructions.base.instruction.Instruction;
 import ch08.instructions.factory.Factory;
 import ch08.rtda.Frame;
 import ch08.rtda.Thread;
-import ch08.rtda.heap.Method;
+import ch08.rtda.heap.*;
+import ch08.rtda.heap.Class;
+import ch08.rtda.heap.ClassLoader;
+import ch08.rtda.heap.Object;
 import com.sun.org.apache.xpath.internal.SourceTree;
 import org.joou.UByte;
 import org.joou.UInteger;
@@ -19,15 +22,30 @@ import java.util.Arrays;
 
 public class interpreter {
 
-    public static void interpret(Method method,boolean logInst) {
+    public static void interpret(Method method,boolean logInst,String[] args) {
         Thread thread=Thread.newThread();
         Frame frame=thread.newFrame(method);
         thread.pushFrame(frame);
         //try {
-            loop(thread, method.code,logInst);
+        Object jArgs=createArgsArray(method.clazz.loader,args);
+        frame.localVars.setRef(UInteger.valueOf(0),jArgs);
+        loop(thread, method.code,logInst);
         /*}catch (Exception e){
             catchErr(thread);
         }*/
+    }
+
+    public static Object createArgsArray(ClassLoader loader,String[] args){
+        Class stringClass=loader.loadClass("java/lang/String");
+       // if(args!=null){
+        Object argsArr=stringClass.arrayClass().newArray(UInteger.valueOf(args.length));
+        Object[] jArgs=argsArr.Refs();
+        for(int i=0;i<args.length;i++){
+            jArgs[i]= StringPool.JString(loader,args[i]);
+        }
+        return argsArr;
+    //}
+      //  return null;
     }
     public static  void catchErr(Thread thread){
         logFrames(thread);

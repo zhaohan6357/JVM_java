@@ -40,17 +40,7 @@ public class Class {
     public Slots staticVars;
     public boolean initStarted;
 
-    /*   func newClass(cf *classfile.ClassFile) *Class {
-           class := &Class{}
-           class.accessFlags = cf.AccessFlags()
-           class.name = cf.ClassName()
-           class.superClassName = cf.SuperClassName()
-           class.interfaceNames = cf.InterfaceNames()
-           class.constantPool = newConstantPool(class, cf.ConstantPool())
-           class.fields = newFields(class, cf.Fields())
-           class.methods = newMethods(class, cf.Methods())
-           return class
-       }*/
+
     public static Class newClass(ClassFile cf) {
         Class clazz = new Class();
         clazz.accessFlags = cf.getAccesFlags();
@@ -96,17 +86,7 @@ public class Class {
     }
 
 
-    /* func (self *Class) isAccessibleTo(other *Class) bool {
-         return self.IsPublic() ||
-                 self.getPackageName() == other.getPackageName()
-     }
 
-     func (self *Class) getPackageName() string {
-         if i := strings.LastIndex(self.name, "/"); i >= 0 {
-             return self.name[:i]
-         }
-         return ""
-     }*/
     public boolean isAccessibleTo(Class other) {
         return this.IsPublic() || this.getPackageName().equals(other.getPackageName());
     }
@@ -118,32 +98,40 @@ public class Class {
         }
         return "";
     }
-
-
-
-   /* func (self *Class) isAssignableFrom(other *Class) bool {
-        s, t := other, self
-
-        if s == t {
-            return true
-        }
-
-        if !t.IsInterface() {
-            return s.isSubClassOf(t)
-        } else {
-            return s.isImplements(t)
-        }
-    }*/
+    public boolean isJlObject(){
+        return this.name.equals("java/lang/Object");
+    }
+    public boolean isJlCloneable(){
+        return this.name.equals("java/lang/Cloneable");
+    }
+    public boolean isJioSerializable(){
+        return this.name.equals("java/io/Serializable");
+    }
 
     public boolean isAssignableFrom(Class other) {
         if (other == this) {
             return true;
         }
-        if (!this.IsInterface()) {
-            return other.isSubClassOf(this);
-        } else {
-            return other.isImplements(this);
+        if(!other.isArray()){
+            if(!other.IsInterface()){
+                if(!this.IsInterface()){
+                    return other.isSubClassOf(this);
+                }else{
+                    return other.isImplements(this);
+                }
+            }else{
+                if(!this.IsInterface()){
+                    return this.isJlObject();
+                }else{
+                    return this.isJlCloneable();
+                }
+            }
+        }else{
+            Class sc=other.componentClass();
+            Class tc=this.componentClass();
+            return sc==tc||tc.isAssignableFrom(sc);
         }
+
     }
 
     public boolean isImplements(Class iface) {
@@ -165,27 +153,7 @@ public class Class {
         }
         return false;
     }
-/*    // self extends c
-    func (self *Class) isSubClassOf(other *Class) bool {
-        for c := self.superClass; c != nil; c = c.superClass {
-            if c == other {
-                return true
-            }
-        }
-        return false
-    }
 
-    // self implements iface
-    func (self *Class) isImplements(iface *Class) bool {
-        for c := self; c != nil; c = c.superClass {
-            for _, i := range c.interfaces {
-                if i == iface || i.isSubInterfaceOf(iface) {
-                    return true
-                }
-            }
-        }
-        return false
-    }*/
 
     public boolean isSubInterfaceOf(Class iface) {
         for (Class superInterface : this.interfaces) {
@@ -195,18 +163,7 @@ public class Class {
         }
         return false;
     }
-    // self extends iface
-/*    func (self *Class) isSubInterfaceOf(iface *Class) bool {
-        for _, superInterface := range self.interfaces {
-            if superInterface == iface || superInterface.isSubInterfaceOf(iface) {
-                return true
-            }
-        }
-        return false
-    }*/
-    /*func (self *Class) NewObject() *Object {
-        return newObject(self)
-    }*/
+
     public Object newObject(){
         return Object.newObject(this);
     }
@@ -235,6 +192,10 @@ public class Class {
         return this.name.charAt(0)=='[';
     }
 
+    public Class componentClass(){
+        String componentClassName=CLASSNAME_HELPER.getComponentClassName(this.name);
+        return this.loader.loadClass(componentClassName);
+    }
     public Object newArray(UInteger count){
         if(!this.isArray()){
             System.out.println("Not array class:"+this.name);
@@ -267,6 +228,20 @@ public class Class {
     public Class arrayClass(){
         String arrayClassName=CLASSNAME_HELPER.getArrayClassName(this.name);
         return this.loader.loadClass(arrayClassName);
+    }
+
+    public Field getField(String name,String descriptor,boolean
+                          isStatic){
+        for(Class c=this;c!=null;c=c.superClass){
+            for(Field field:c.fields){
+                if(field.IsStatic()==isStatic&&
+                field.name.equals(name)&&field.descriptor
+                    .equals(descriptor)){
+                    return field;
+                }
+            }
+        }
+        return null;
     }
 
 
