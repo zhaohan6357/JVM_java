@@ -34,7 +34,7 @@ public class Class {
     public Method[] methods;
     public ClassLoader loader;
     public Class superClass;
-    public Class[] interfaces;
+    public Class[] interfaces=new Class[0];
     public UInteger instanceSlotCount;
     public UInteger staticSlotCount;
     public Slots staticVars;

@@ -13,6 +13,7 @@ public class Method_Lookup {
     }
 
     public static Method lookupMethodInInterfaces(Class[] ifaces,String name,String descriptor){
+
         for(Class iface:ifaces){
             for(Method method:iface.methods){
                 if(method.name.equals(name)&&method.descriptor.equals(descriptor)){
