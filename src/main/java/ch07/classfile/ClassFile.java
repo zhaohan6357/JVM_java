@@ -90,9 +90,9 @@ public class ClassFile {
         }*/
         int attributesCount=reader.readUInt16().intValue();
         AttributeInfo[] attributes=new AttributeInfo[attributesCount];
-//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
-//        System.out.println(attributesCount);
-//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+//        System_.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+//        System_.out.println(attributesCount);
+//        System_.out.println("!!!!!!!!!!!!!!!!!!!!!!");
         for(int i=0;i<attributesCount;i++){
             attributes[i]=readAttribute(reader,constantPool);
         }
@@ -179,7 +179,7 @@ public class ClassFile {
             case 51:
             case 52: {
                 if(minV==0){
-                    //System.out.println("the version is correct!");
+                    //System_.out.println("the version is correct!");
                     return;
                 }
             }

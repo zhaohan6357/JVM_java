@@ -47,16 +47,16 @@ public class OperandStack {
     public void pushInt(int val){
         this.slots[size.intValue()].num=val;
         size=size.add(1);
-   /*     System.out.println("+++++++++++");
-        System.out.println(size);
-        System.out.println("+++++++++++");*/
+   /*     System_.out.println("+++++++++++");
+        System_.out.println(size);
+        System_.out.println("+++++++++++");*/
 
     }
     public int popInt(){
         size=size.subtract(1);
-   /*     System.out.println("----------");
-        System.out.println(size);
-        System.out.println("----------");*/
+   /*     System_.out.println("----------");
+        System_.out.println(size);
+        System_.out.println("----------");*/
         return this.slots[size.intValue()].num;
     }
 

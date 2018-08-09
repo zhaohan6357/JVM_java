@@ -80,7 +80,7 @@ public class Main
         String name=cmd.className.replace('.','/');
        /* byte[] data=cp.ReadClass(name);
         for(byte b:data)
-       System.out.print((0xFF new  b)+" ");*/
+       System_.out.print((0xFF new  b)+" ");*/
         ClassFile cf=loadClass(name,cp);
         printClassInfo(cf);
 
@@ -90,7 +90,7 @@ public class Main
        // Entry entry=new Zip_Entry("F:\\zipTest\\rt.jar");
        // File file=new File("F:\\zipTest\\rt.jar");
         //entry.readClass("1.class");
-       // System.out.println(file.getAbsolutePath());
+       // System_.out.println(file.getAbsolutePath());
         Cmd cmd=new Cmd();
         cmd.cmdParse(args);
         if(cmd.className!=null){

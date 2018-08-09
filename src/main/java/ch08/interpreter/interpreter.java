@@ -81,7 +81,7 @@ public class interpreter {
                 logInstruction(frame,inst);
             }
 
-          //  System.out.printf("pc:%2d,  instruction:%s oprand:%s\n",pc,inst.getClass(),inst.index);
+          //  System_.out.printf("pc:%2d,  instruction:%s oprand:%s\n",pc,inst.getClass(),inst.index);
             inst.Execute(frame);
             if(thread.isStackEmpty()){
                 break;

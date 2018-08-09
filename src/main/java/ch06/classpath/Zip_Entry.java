@@ -22,11 +22,11 @@ public class Zip_Entry implements Entry {
                 if (ze.isDirectory()) {
                 } else {
                     long size = ze.getSize();
-                    //System.out.println(ze.getName());
+                    //System_.out.println(ze.getName());
                    /// String[] names=ze.getName().split("/");//此处getName中含有路径,需要去除//并不需要 zip文件名自带层级结构
                     //String fileName=names[names.length-1];
                     String fileName=ze.getName();
-                   // System.out.println(fileName);
+                   // System_.out.println(fileName);
                     if (size > 0&&fileName.equals(className)) { //String 比较 使用equals
                         BufferedInputStream bf = new BufferedInputStream(zf.getInputStream(ze));
                         ByteArrayOutputStream out = new ByteArrayOutputStream();

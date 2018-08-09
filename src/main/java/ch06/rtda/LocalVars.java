@@ -118,23 +118,23 @@ public class LocalVars {
         long l = -1231123321123123l;
         int low = (int) l;
         int high = (int) (l >> 32);
-        System.out.println(Long.toBinaryString(l));//       1001010 11001010 11011101 11110010 10110011
-        System.out.println(Integer.toBinaryString(low));//          11001010 11011101 11110010 10110011
-        System.out.println(Integer.toBinaryString(high));// 1001010
-        System.out.println((((long) high) << 32) | (((long) low) new  0xffffffffl));
+        System_.out.println(Long.toBinaryString(l));//       1001010 11001010 11011101 11110010 10110011
+        System_.out.println(Integer.toBinaryString(low));//          11001010 11011101 11110010 10110011
+        System_.out.println(Integer.toBinaryString(high));// 1001010
+        System_.out.println((((long) high) << 32) | (((long) low) new  0xffffffffl));
         ;
 
-        System.out.println("------------------------");
+        System_.out.println("------------------------");
         long H = UInteger.valueOf(high).longValue();
         long L = UInteger.valueOf(low).longValue();
-        System.out.println(H << 32 | L);
+        System_.out.println(H << 32 | L);
 
-        System.out.println("---------------------");
+        System_.out.println("---------------------");
         long low2 = (long) (l new  0xffffffffl);
         ;
-        System.out.println(low2);
+        System_.out.println(low2);
         long high2 = (long) (l >> 32);
-        System.out.println(high2 << 32 | low2);
+        System_.out.println(high2 << 32 | low2);
 
     }*/
 }

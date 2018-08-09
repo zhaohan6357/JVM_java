@@ -1,0 +1,41 @@
+1.static的判断 field初始化时    classloader.java  prepare()函数 slotId
+2.constant初始化后才能用 obj  ConstantPool.java line22
+3.popRef的问题  DUP指令后 如果push进去同一个指向Object的ref 那操作一个另一个也会受影响,所以需要深拷贝
+4.constvalueindex的初始化  常量池第一个不用 所以可以初始化为0 或许正因为要初始化为0所以不用?
+  Field.java  里如果constValueIndex不初始化 classLoader.JAVA  initStaticFinalVar 里直接使用cpIndex.intValue会出错
+
+
+ch7:
+描述符末尾包含分号
+看看invokespecial指令的执行过程
+this ref.class和resolvedClass是不是一个东西?
+
+接口中方法不能说protected
+我理解的protected的访问规则:
+
+调用的class  currentClass
+方法所属对象的class resolvedMethod.Class
+this引用所属的class ref.class
+
+若有如下命题:
+命题A currentClass和 resolvedMethod.Class不在同一包内
+命题B currentClass是resolvedMethod.Class子类
+命题C ref.class是currentClass的子类
+命题D ref.class和currentClass相等
+则非法访问的规则的逻辑表达式可以表达如下:
+A (!(BC+BD))
+=A(!(BC))(!(BD))
+=A(!B+!C)(!B+!D)
+=A(!B)(!C+!D)
+
+即currentClass和 resolvedMethod.Class不在同一包内  且   currentClass不是resolvedMethod.Class子类
+且(ref.class不是currentClass的子类  或  ref.class和currentClass不相等)
+
+bug:
+heap.constantpool.java 是long或double时  i++
+
+
+好像包含main方法的类会将父类的方法完全解析到本类中
+
+ch09 methodLoop.java null的判断
+

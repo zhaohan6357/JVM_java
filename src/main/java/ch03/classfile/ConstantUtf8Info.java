@@ -36,6 +36,6 @@ public class ConstantUtf8Info  extends  ConstantInfo{
         DataInputStream dis = new DataInputStream(bin);
         String newName = dis.readUTF();
        // int newAge = dis.readInt();
-        System.out.println(newName);
+        System_.out.println(newName);
     }*/
 }
